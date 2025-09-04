@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="160" height="45" viewBox="0 0 160 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- 長方形背景 -->
+    <rect x="1" y="1" width="158" height="43" rx="21.5" fill="url(#logoGradient)"/>
+    <rect x="1" y="1" width="158" height="43" rx="21.5" stroke="white" stroke-width="1.5" opacity="0.3"/>
+    
+    <!-- 左側圓形圖標區 -->
+    <g transform="translate(23, 22.5)">
+        <!-- 圓形背景 -->
+        <circle cx="0" cy="0" r="18" fill="white" opacity="0.2"/>
+        
+        <!-- 長頸鹿圖標 -->
+        <!-- 頭部 -->
+        <ellipse cx="0" cy="-6" rx="5" ry="6" fill="white"/>
+        <!-- 角 -->
+        <circle cx="-3" cy="-11" r="1.5" fill="white"/>
+        <circle cx="3" cy="-11" r="1.5" fill="white"/>
+        <rect x="-4" y="-11" width="2" height="4" fill="white"/>
+        <rect x="2" y="-11" width="2" height="4" fill="white"/>
+        <!-- 耳朵 -->
+        <ellipse cx="-4" cy="-7" rx="1.5" ry="2" fill="white"/>
+        <ellipse cx="4" cy="-7" rx="1.5" ry="2" fill="white"/>
+        <!-- 頸部 -->
+        <path d="M-3 -2 Q-3 3 -3 10 L3 10 Q3 3 3 -2 Z" fill="white"/>
+        <!-- 斑點 -->
+        <circle cx="-1" cy="1" r="1.3" fill="url(#spotGradient)" opacity="0.6"/>
+        <circle cx="2" cy="3" r="1.1" fill="url(#spotGradient)" opacity="0.6"/>
+        <circle cx="-1.5" cy="5" r="1" fill="url(#spotGradient)" opacity="0.6"/>
+        <circle cx="1.5" cy="7" r="0.9" fill="url(#spotGradient)" opacity="0.6"/>
+        <!-- 眼睛 -->
+        <circle cx="-2" cy="-6" r="0.8" fill="#1E3A8A"/>
+        <circle cx="2" cy="-6" r="0.8" fill="#1E3A8A"/>
+        <!-- 鼻子 -->
+        <ellipse cx="0" cy="-3" rx="1.5" ry="0.8" fill="#3B82F6" opacity="0.4"/>
+    </g>
+    
+    <!-- 右側文字區 -->
+    <g transform="translate(48, 22.5)">
+        <!-- 主標題 -->
+        <text x="0" y="-3" font-family="'Noto Sans TC', 'Microsoft JhengHei', Arial, sans-serif" font-size="13" font-weight="700" fill="white">
+            王嘉涓作品集
+        </text>
+        <!-- 副標題 -->
+        <text x="0" y="10" font-family="Arial, sans-serif" font-size="9" fill="white" opacity="0.9">
+            Creative Portfolio
+        </text>
+    </g>
+    
+    <!-- 漸層定義 -->
+    <defs>
+        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#1E3A8A;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="spotGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#1E3A8A;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+</svg>
