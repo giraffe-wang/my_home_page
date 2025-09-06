@@ -2,21 +2,11 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>王嘉涓作品集 - Portfolio</title>
     <style>
         /* Modern Design System Variables */
         :root {
-            /* Safe Area Insets for iOS */
-            --safe-area-top: env(safe-area-inset-top, 0px);
-            --safe-area-bottom: env(safe-area-inset-bottom, 0px);
-            --safe-area-left: env(safe-area-inset-left, 0px);
-            --safe-area-right: env(safe-area-inset-right, 0px);
-            
-            /* Fixed Nav Height */
-            --nav-height: 70px;
-            
             /* Brand Colors - Modern Blue Gradient */
             --primary: #1E40AF;
             --primary-dark: #1E3A8A;
@@ -127,27 +117,11 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            padding-top: var(--safe-area-top);
-            padding-bottom: var(--safe-area-bottom);
-            width: 100%;
-            position: relative;
         }
 
         /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
-            width: 100%;
-            overflow-x: hidden;
-        }
-        
-        /* Prevent horizontal scroll */
-        *, *::before, *::after {
-            max-width: 100vw;
-        }
-        
-        /* Scroll margin for all sections */
-        section[id] {
-            scroll-margin-top: calc(var(--nav-height) + 10px);
         }
 
         /* Modern Button Styles */
@@ -167,8 +141,6 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            min-height: 48px;
-            min-width: 48px;
         }
         
         .btn-primary::before {
@@ -204,8 +176,6 @@
             transition: var(--transition-base);
             display: inline-block;
             text-decoration: none;
-            min-height: 48px;
-            min-width: 48px;
         }
 
         .btn-secondary:hover {
@@ -296,7 +266,7 @@
         /* Navigation */
         nav {
             position: fixed;
-            top: var(--safe-area-top);
+            top: 0;
             width: 100%;
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
@@ -304,7 +274,6 @@
             padding: var(--space-sm) var(--space-lg);
             box-shadow: var(--shadow-sm);
             transition: var(--transition-base);
-            height: var(--nav-height);
         }
 
         nav.scrolled {
@@ -351,10 +320,6 @@
             font-size: var(--font-sm);
             letter-spacing: 0.5px;
             position: relative;
-            padding: 12px 16px;
-            display: inline-block;
-            min-height: 48px;
-            line-height: 24px;
         }
 
         .nav-links a::after {
@@ -374,9 +339,8 @@
 
         /* Hero Section - 3D Style */
         .hero {
-            margin-top: calc(var(--nav-height) + var(--safe-area-top));
-            height: 100vh;
-            height: 100svh;
+            margin-top: 70px;
+            height: auto;
             min-height: 400px;
             background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
             display: flex;
@@ -384,7 +348,7 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
-            padding: 4rem calc(2rem + var(--safe-area-left)) 6rem calc(2rem + var(--safe-area-right));
+            padding: 4rem 2rem 6rem 2rem;
         }
 
         /* 3D Glass Morphism Background */
@@ -655,9 +619,6 @@
             text-decoration: none;
             transition: all 0.3s;
             animation: bounce 2s ease-in-out infinite;
-            min-width: 48px;
-            min-height: 48px;
-            padding: 12px;
         }
         
         @keyframes button-3d {
@@ -807,7 +768,7 @@
 
         /* About Section */
         .about-section {
-            padding: var(--space-2xl) calc(var(--space-lg) + var(--safe-area-left)) var(--space-lg) calc(var(--space-lg) + var(--safe-area-right));
+            padding: var(--space-2xl) var(--space-lg) var(--space-lg) var(--space-lg);
             background: #ffffff;
         }
 
@@ -1185,7 +1146,6 @@
             height: 220px;
             perspective: 1000px;
             cursor: pointer;
-            aspect-ratio: 16/9;
         }
 
         .work-card-inner {
@@ -1197,9 +1157,18 @@
             transform-style: preserve-3d;
         }
 
-        .work-card:hover .work-card-inner,
-        .work-card.is-flipped .work-card-inner {
-            transform: rotateY(180deg);
+        /* 桌面版hover效果 */
+        @media (min-width: 768px) {
+            .work-card:hover .work-card-inner {
+                transform: rotateY(180deg);
+            }
+        }
+        
+        /* 桌面版翻轉狀態 */
+        @media (min-width: 768px) {
+            .work-card.is-flipped .work-card-inner {
+                transform: rotateY(180deg) !important;
+            }
         }
 
         .work-card-face {
@@ -1246,7 +1215,7 @@
         .company-logo {
             width: 60px;
             height: 60px;
-            background: var(--primary-gradient);
+            background: white;
             border-radius: var(--radius-md);
             margin-bottom: 0.75rem;
             display: flex;
@@ -1258,12 +1227,13 @@
             z-index: 1;
             font-size: 1.2rem;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            padding: 5px;
         }
 
         .company-logo img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             border-radius: var(--radius-lg);
         }
 
@@ -1543,7 +1513,7 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            padding: 2rem 2rem 4rem;
+            padding: 2rem 2rem 2rem;
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
@@ -1658,7 +1628,6 @@
             transition: all 0.3s;
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            aspect-ratio: 16/9;
         }
 
         .project-card:hover {
@@ -2140,11 +2109,13 @@
             margin-top: -0.5rem;
         }
         
-        .spring-campaign-block {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
-            border-radius: 25px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        @media (min-width: 768px) {
+            .spring-campaign-block {
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+                border-radius: 25px;
+                padding: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
         }
         
         .campaign-header {
@@ -2186,11 +2157,13 @@
             margin-top: 3rem;
         }
         
-        .festival-block {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
-            border-radius: 25px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        @media (min-width: 768px) {
+            .festival-block {
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+                border-radius: 25px;
+                padding: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
         }
         
         .festival-content-redesign {
@@ -2331,36 +2304,40 @@
         }
 
         /* LINE Gift Section Styles */
-        .line-gift-block {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
-            border-radius: 25px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 1rem;
+        /* 電腦版LINE禮物區塊樣式 - 僅限桌面版 */
+        @media (min-width: 768px) {
+            .line-gift-block {
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+                border-radius: 25px;
+                padding: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                margin-top: 1rem;
+            }
+            
+            .line-gift-first-row {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .line-images-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+                margin-top: 1rem;
+                padding: 0;
+            }
         }
         
-        /* LINE禮物預設樣式（電腦版） */
-        .line-images-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .line-images-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin-top: 1rem;
-            padding: 0;
-        }
-        
-        .line-categories {
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
-            margin-top: 2rem;
-        }
+        /* 桌面版 LINE categories 樣式 */
+        @media (min-width: 768px) {
+            .line-categories {
+                display: flex;
+                flex-direction: column;
+                gap: 2.5rem;
+                margin-top: 2rem;
+            }
         
         .line-category {
             display: flex;
@@ -2438,51 +2415,9 @@
             font-size: 0.95rem;
             font-weight: 500;
         }
+        } /* 結束桌面版 LINE categories 媒體查詢 */
         
-        @media (max-width: 1400px) {
-            .line-images-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 1.2rem;
-            }
-        }
-        
-        @media (max-width: 1024px) {
-            .line-images-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
-            
-            .line-item img {
-                min-height: 260px;
-                max-height: 300px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .line-images-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.8rem;
-                padding: 0;
-            }
-            
-            .line-item img {
-                min-height: 200px;
-                max-height: 240px;
-                padding: 6px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .line-images-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            .line-item img {
-                min-height: 250px;
-                max-height: 280px;
-            }
-        }
+        /* 移除多餘的LINE禮物媒體查詢，與限定活動保持一致 */
         
         /* Decorative elements */
         .design-gallery::before {
@@ -2523,7 +2458,6 @@
             align-items: center;
             justify-content: center;
             background: #f8f9fa;
-            aspect-ratio: 16/9;
         }
 
         .portfolio-item:hover {
@@ -3079,7 +3013,7 @@
 
         /* Contact Section */
         .contact {
-            padding: 1.5rem calc(1.2rem + var(--safe-area-left)) calc(1.5rem + var(--safe-area-bottom)) calc(1.2rem + var(--safe-area-right));
+            padding: 1.5rem 1.2rem;
             background: linear-gradient(180deg, #f7fafc 0%, #ffffff 100%);
         }
 
@@ -3133,8 +3067,6 @@
             font-size: 1.1rem;
             transition: all 0.3s;
             box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-            min-height: 48px;
-            line-height: 26px;
         }
 
         .contact-button:hover {
@@ -3189,9 +3121,7 @@
             background: none;
             border: none;
             cursor: pointer;
-            padding: 12px;
-            min-width: 48px;
-            min-height: 48px;
+            padding: 0.5rem;
         }
 
         .mobile-menu-toggle span {
@@ -3359,8 +3289,8 @@
             }
 
             .carousel-nav {
-                width: 48px;
-                height: 48px;
+                width: 40px;
+                height: 40px;
                 font-size: 1.2rem;
             }
 
@@ -3409,8 +3339,8 @@
             }
         }
 
-        /* Mobile Large - Fixed */
-        @media (max-width: 480px) and (min-width: 415px) {
+        /* Mobile Large */
+        @media (max-width: 480px) {
             :root {
                 --space-xs: 0.3rem;
                 --space-sm: 0.6rem;
@@ -3484,8 +3414,8 @@
             }
             
             .carousel-nav {
-                width: 48px;
-                height: 48px;
+                width: 35px;
+                height: 35px;
                 font-size: 1rem;
             }
             
@@ -3501,128 +3431,131 @@
             }
         }
 
-        /* CRITICAL MOBILE FIX - Apply to ALL mobile devices */
+        /* Mobile viewport fixes */
         @media (max-width: 768px) {
-            /* Reset viewport scale */
+            /* Basic viewport reset */
             html, body {
-                width: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                overflow-x: hidden !important;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
             }
             
-            /* Force all content to stay within viewport */
+            /* Ensure content stays within viewport */
             * {
-                max-width: 100% !important;
-                box-sizing: border-box !important;
-            }
-            
-            /* Remove ALL horizontal transforms and positions */
-            * {
-                left: auto !important;
-                right: auto !important;
-                transform: translateX(0) !important;
+                max-width: 100vw;
+                box-sizing: border-box;
             }
             
             /* Fix navigation bar */
             #navbar {
-                position: fixed !important;
-                top: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
-                width: 100% !important;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                z-index: 1000;
             }
         }
         
-        /* 手機版核心專業技能和服務產業別修復 */
+        /* Mobile professional skills optimization */
         @media (max-width: 767px) {
-            /* 核心專業技能 - 與邊界保持距離並允許重疊 */
+            /* Professional skills responsive layout */
             .professional-skills {
-                padding: 0 20px !important;
-                overflow: visible !important;
+                padding: 0 20px;
+                overflow: visible;
             }
             
             .professional-skills .skill-circle {
-                width: 110px !important;
-                height: 110px !important;
-                flex-shrink: 0 !important;
+                width: 90px;
+                height: 90px;
+                flex-shrink: 0;
             }
             
             .professional-skills > div > div {
-                gap: 0 !important;
-                justify-content: center !important;
-                padding: 10px 0 !important;
-                margin: 0 -5px !important; /* 允許圓圈稍微重疊 */
+                gap: 0.5rem;
+                justify-content: center;
+                padding: 10px 0;
             }
             
             .professional-skills .skill-circle {
-                margin: 0 -8px !important; /* 讓圓圈之間有些許重疊 */
+                margin: 0 -5px;
             }
             
-            /* 統計數據 - 與邊界保持距離 */
+            /* Stats section responsive */
             .about-stats {
-                padding: 0 20px !important;
-                margin: 2rem 15px !important;
+                padding: 0 20px;
+                margin: 2rem auto;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
             }
             
             .stat-item {
-                min-width: 90px !important;
-                flex: 0 1 30% !important;
-                padding: 0 5px !important;
+                text-align: center;
+                padding: 0 5px;
             }
             
             .stat-number {
-                font-size: 2rem !important;
-                white-space: nowrap !important;
+                font-size: 2rem;
+                white-space: nowrap;
             }
             
             .stat-label {
-                font-size: 0.85rem !important;
-                white-space: nowrap !important;
+                font-size: 0.85rem;
+                white-space: nowrap;
             }
             
-            /* 專業工具運用 - 縮小圖片 */
+            /* Tools grid responsive */
+            .tools-grid {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.8rem;
+                justify-content: center;
+            }
+            
             .tools-grid img {
-                width: 70px !important;
-                height: 70px !important;
+                width: 70px;
+                height: 70px;
             }
             
             .tools-grid .tool-item {
-                padding: 10px !important;
+                padding: 10px;
+                flex: 0 0 auto;
             }
             
             /* 電商企劃手機版小標位置調整 - 移除重複規則 */
             
-            /* 社群操作左右滑動 */
+            /* Social container horizontal scroll */
             .social-triple-container {
-                display: flex !important;
-                overflow-x: auto !important;
-                overflow-y: hidden !important;
-                scroll-snap-type: x mandatory !important;
-                -webkit-overflow-scrolling: touch !important;
-                padding: 20px 10px !important;
-                gap: 15px !important;
+                display: flex;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                padding: 20px 10px;
+                gap: 15px;
             }
             
             .social-triple-container .social-stack {
-                flex: 0 0 280px !important;
-                scroll-snap-align: center !important;
-                margin: 0 !important;
+                flex: 0 0 280px;
+                scroll-snap-align: center;
+                margin: 0;
             }
             
-            /* 隱藏滾動條但保持功能 */
+            /* Custom scrollbar */
             .social-triple-container::-webkit-scrollbar {
-                height: 5px !important;
+                height: 5px;
             }
             
             .social-triple-container::-webkit-scrollbar-track {
-                background: rgba(0,0,0,0.1) !important;
-                border-radius: 10px !important;
+                background: rgba(0,0,0,0.1);
+                border-radius: 10px;
             }
             
             .social-triple-container::-webkit-scrollbar-thumb {
-                background: rgba(102, 126, 234, 0.3) !important;
-                border-radius: 10px !important;
+                background: rgba(102, 126, 234, 0.3);
+                border-radius: 10px;
             }
         }
         
@@ -3679,29 +3612,23 @@
             }
         }
         
-        /* COMPLETE MOBILE REBUILD - FORCE OVERRIDE */
+        /* Mobile optimizations for small screens */
         @media screen and (max-width: 600px) {
-            /* CRITICAL: Reset ALL widths */
-            * {
-                max-width: none !important;
-                min-width: 0 !important;
-                width: auto !important;
-            }
-            
-            /* Then set proper widths */
+            /* Viewport settings */
             html {
-                width: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                overflow-x: hidden !important;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
             }
             
             body {
-                width: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                overflow-x: hidden !important;
-                font-size: 16px !important; /* Prevent zoom issues */
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
+                font-size: 16px; /* Prevent auto-zoom */
+                -webkit-text-size-adjust: 100%;
             }
             
             /* Hide all decorative elements that might overflow */
@@ -3876,99 +3803,108 @@
                 padding: 0 10px !important;
             }
             
-            /* Fix images */
+            /* Responsive images */
             img {
-                max-width: 100% !important;
-                height: auto !important;
+                max-width: 100%;
+                height: auto;
             }
             
-            /* Fix brand logos */
+            /* Brand logos responsive */
             .brand-logo-item {
-                width: auto !important;
-                max-width: 100px !important;
+                width: auto;
+                max-width: 100px;
+                height: auto;
             }
             
-            /* Fix preview containers */
+            /* Preview containers responsive */
             .preview-main,
             .preview-side,
             .campaign-header-side {
-                min-width: unset !important;
-                max-width: 100% !important;
+                min-width: unset;
+                max-width: 100%;
+                width: 100%;
             }
             
-            /* Fix planning works carousel */
+            /* Planning works carousel responsive */
             .planning-works .container {
-                width: 100% !important;
-                padding: 0 15px !important;
+                width: 100%;
+                padding: 0 15px;
             }
             
             .carousel-container {
-                width: 100% !important;
-                margin: 0 !important;
-                padding: 0 15px !important;
-                box-sizing: border-box !important;
+                width: 100%;
+                margin: 0 auto;
+                padding: 0 15px;
+                box-sizing: border-box;
             }
             
             .copy-content {
-                padding: 0 !important;
+                padding: 0;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
             }
             
             .copy-image,
             .copy-text {
-                padding: 0 15px !important;
+                padding: 0 15px;
+                width: 100%;
+                box-sizing: border-box;
             }
             
-            /* Fix section titles and labels */
+            /* Section titles responsive */
             .section-title {
-                font-size: 1.5rem !important;
-                line-height: 1.2 !important;
+                font-size: 1.5rem;
+                line-height: 1.2;
+                padding: 0 10px;
             }
             
             .section-label {
-                font-size: 0.7rem !important;
+                font-size: 0.7rem;
+                padding: 0 10px;
             }
             
-            /* Fix work cards */
+            /* Work cards responsive */
             .work-card {
-                width: 100% !important;
-                max-width: none !important;
+                width: 100%;
+                max-width: 100%;
+                margin: 0 auto;
             }
             
-            /* Fix portfolio mosaic */
+            /* Portfolio mosaic responsive */
             .portfolio-mosaic {
-                width: 100% !important;
-                padding: 0 !important;
+                width: 100%;
+                padding: 0 10px;
+                box-sizing: border-box;
             }
             
-            /* FINAL OVERRIDE: Ensure absolutely no horizontal scroll */
+            /* Prevent horizontal scroll */
             * {
-                max-width: 100vw !important;
-                box-sizing: border-box !important;
+                max-width: 100vw;
+                box-sizing: border-box;
             }
             
-            /* FORCE ALL ELEMENTS TO FULL WIDTH */
-            
-            /* Navigation must be full width */
+            /* Navigation responsive layout */
             #navbar {
-                position: fixed !important;
-                top: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
-                width: 100% !important;
-                margin: 0 !important;
-                padding: 10px 0 !important;
-                z-index: 1000 !important;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                margin: 0;
+                padding: 10px 0;
+                z-index: 1000;
             }
             
             .nav-container {
-                width: 100% !important;
-                max-width: 100% !important;
-                margin: 0 !important;
-                padding: 0 15px !important;
-                display: flex !important;
-                justify-content: space-between !important;
-                align-items: center !important;
-                box-sizing: border-box !important;
+                width: 100%;
+                max-width: 100%;
+                margin: 0;
+                padding: 0 15px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                box-sizing: border-box;
             }
             
             .logo {
@@ -3989,17 +3925,16 @@
                 right: 0 !important;
             }
             
-            /* FORCE all sections to be full width */
+            /* Responsive sections and containers */
             section {
-                width: 100% !important;
-                max-width: 100% !important;
-                margin: 0 !important;
-                padding: 60px 15px 30px 15px !important;
-                box-sizing: border-box !important;
+                width: 100%;
+                max-width: 100%;
+                margin: 0;
+                padding: 60px 15px 30px 15px;
+                box-sizing: border-box;
             }
             
-            /* FORCE all containers to be full width */
-            div[class*="container"],
+            /* Container responsive widths */
             .container,
             .about-container,
             .work-grid,
@@ -4007,11 +3942,11 @@
             .portfolio-mosaic,
             .carousel-container,
             .planning-works .container {
-                width: 100% !important;
-                max-width: 100% !important;
-                margin: 0 !important;
-                padding: 0 15px !important;
-                box-sizing: border-box !important;
+                width: 100%;
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 0 15px;
+                box-sizing: border-box;
             }
             
             /* Fix specific width issues */
@@ -4025,11 +3960,17 @@
                 margin-right: 0 !important;
             }
             
-            /* Hero section simplified - 移除重複樣式 */
+            /* Hero section mobile optimization */
+            .hero {
+                min-height: 350px;
+                padding: 3rem 20px 4rem;
+                overflow: hidden;
+            }
             
             .hero-content {
                 width: 100%;
                 padding: 0;
+                text-align: center;
             }
             
             /* Cards and items - Single column */
@@ -4099,65 +4040,101 @@
             }
         }
         
-        /* Desktop ONLY - Preserve original layout */
+        /* Desktop layout preservation */
         @media (min-width: 1025px) {
-            /* Ensure desktop layout is not affected by mobile fixes */
+            /* Desktop specific styles - preserve original layout */
             
-            /* Reset any mobile overrides for desktop */
-            * {
-                position: initial;
-                transform: initial;
-                left: initial;
-                right: initial;
-            }
-            
-            /* Maintain original desktop gallery container */
+            /* Gallery container desktop width */
             .gallery-container {
-                /* Keep original desktop styles */
                 max-width: 1200px;
+                margin: 0 auto;
                 padding: 0 2rem;
             }
             
-            /* Preserve festival layout for desktop */
+            /* Festival layout for desktop - maintain grid */
             .festival-top-row {
-                display: grid !important;
-                grid-template-columns: repeat(3, 1fr) !important;
-                gap: 1.5rem !important;
-                align-items: start !important;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+                align-items: start;
             }
             
             .festival-bottom-row {
-                display: grid !important;
-                grid-template-columns: repeat(3, 1fr) !important;
-                gap: 1.5rem !important;
-                align-items: start !important;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+                align-items: start;
             }
             
-            /* Ensure navigation stays as designed */
+            /* Navigation desktop styles */
             #navbar {
                 position: fixed;
                 width: 100%;
+                top: 0;
+                z-index: 1000;
             }
             
-            /* Keep original carousel positions */
+            /* Carousel navigation absolute positioning */
             .carousel-nav,
             .social-carousel-nav {
                 position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
             }
             
-            /* Maintain hero decorative elements */
+            /* Show hero decorative elements on desktop */
             .hero-shapes,
             .hero-particles,
             .shape-1, .shape-2, .shape-3, .shape-4 {
                 display: block;
             }
+            
+            /* Professional skills desktop layout */
+            .professional-skills .skill-circle {
+                width: 120px;
+                height: 120px;
+            }
+            
+            /* Tools grid desktop layout */
+            .tools-grid {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
+                justify-content: center;
+            }
+            
+            /* Prevent desktop from inheriting mobile restrictions */
+            * {
+                max-width: none;
+            }
+            
+            section {
+                overflow: visible;
+            }
         }
+        
+        /* 控制電腦版和手機版顯示切換 */
+        .desktop-only {
+            display: block;
+        }
+        .mobile-only {
+            display: none;
+        }
+        
         /* ===============================================
            手機版響應式設計 (最大 767px)
            =============================================== */
         @media (max-width: 767px) {
             /* 顯示手機版小標題 */
             .mobile-section-title {
+                display: block !important;
+            }
+            
+            /* 手機版顯示切換 */
+            .desktop-only {
+                display: none !important;
+            }
+            .mobile-only {
                 display: block !important;
             }
             
@@ -4274,6 +4251,83 @@
                 display: none !important;
             }
             
+            /* LINE禮物區塊手機版 - 重新設計橫向滑動 */
+            #ecommerce-works .line-gift-block {
+                margin-top: 1rem !important;
+                margin-bottom: 1rem !important;
+                padding: 0 !important;
+                background: transparent !important;
+                border-radius: 0 !important;
+                position: relative !important;
+                min-height: auto !important;
+            }
+            
+            /* LINE禮物手機版標題 */
+            #ecommerce-works .line-gift-block::before {
+                content: 'LINE禮物' !important;
+                display: block !important;
+                font-size: 1.2rem !important;
+                font-weight: 700 !important;
+                color: white !important;
+                margin-bottom: 1rem !important;
+                padding: 0 1rem !important;
+                text-align: left !important;
+                position: relative !important;
+                letter-spacing: 0.5px !important;
+            }
+            
+            /* LINE禮物滾動容器 */
+            #ecommerce-works .line-gift-block .line-gift-wrapper {
+                display: flex !important;
+                overflow-x: auto !important;
+                overflow-y: hidden !important;
+                -webkit-overflow-scrolling: touch !important;
+                scroll-behavior: smooth !important;
+                padding: 0 1rem !important;
+                gap: 1rem !important;
+            }
+            
+            /* 隱藏滾動條但保留滑動功能 */
+            #ecommerce-works .line-gift-block .line-gift-wrapper::-webkit-scrollbar {
+                display: none !important;
+            }
+            
+            /* 將所有grid內的項目展開成單一層級 */
+            #ecommerce-works .line-gift-block .line-gift-first-row,
+            #ecommerce-works .line-gift-block .line-images-grid {
+                display: contents !important;
+            }
+            
+            /* 手機版隱藏標題卡片 */
+            #ecommerce-works .line-gift-block .campaign-header-side {
+                display: none !important;
+            }
+            
+            /* LINE圖片項目樣式 */
+            #ecommerce-works .line-gift-block .line-item {
+                flex: 0 0 75vw !important;
+                min-width: 75vw !important;
+                max-width: 75vw !important;
+                height: 220px !important;
+                position: relative !important;
+                background: white !important;
+                border-radius: 20px !important;
+                overflow: hidden !important;
+                padding: 8px !important;
+            }
+            
+            #ecommerce-works .line-gift-block .line-item img {
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: contain !important;
+                padding: 0 !important;
+                border-radius: 12px !important;
+            }
+            
+            /* 手機版隱藏LINE標籤文案 */
+            #ecommerce-works .line-gift-block .line-overlay {
+                display: none !important;
+            }
             
             /* 導覽列 - 漢堡選單 */
             .nav-links {
@@ -4473,184 +4527,175 @@
             
             /* 只在手機版應用這些樣式 */
             @media (max-width: 767px) {
+                /* 移除舊的衝突樣式 - 已被新的翻轉卡片樣式取代 */
+                
+                /* 手機版卡片翻轉式 - 支援橫向滑動 */
+                #experience .work-cards-grid {
+                    display: flex !important;
+                    overflow-x: auto !important;
+                    scroll-snap-type: x mandatory !important;
+                    -webkit-overflow-scrolling: touch !important;
+                    gap: 1rem !important;
+                    padding: 1rem 0.5rem 2rem !important;
+                    margin: 0 -1rem !important;
+                }
+                
+                #experience .work-cards-grid::-webkit-scrollbar {
+                    height: 5px !important;
+                }
+                
+                #experience .work-cards-grid::-webkit-scrollbar-track {
+                    background: rgba(0,0,0,0.05) !important;
+                    border-radius: 10px !important;
+                }
+                
+                #experience .work-cards-grid::-webkit-scrollbar-thumb {
+                    background: rgba(102, 126, 234, 0.3) !important;
+                    border-radius: 10px !important;
+                }
+                
                 #experience .work-card {
-                    height: auto !important;
-                    min-height: auto !important;
-                    background: white !important;
-                    border-radius: 16px !important;
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
-                    overflow: hidden !important;
-                    transition: all 0.3s ease !important;
+                    flex: 0 0 280px !important;
+                    width: 280px !important;
+                    height: 350px !important;
+                    scroll-snap-align: center !important;
+                    margin: 0 !important;
+                    perspective: 1000px !important;
                     cursor: pointer !important;
-                    border: 1px solid rgba(229, 231, 235, 0.3) !important;
-                    margin-bottom: 1rem !important;
+                    user-select: none !important; /* 防止選取文字 */
+                    -webkit-tap-highlight-color: transparent !important; /* 移除點擊高亮 */
+                }
+                
+                #experience .work-card-inner {
                     position: relative !important;
+                    width: 100% !important;
+                    height: 100% !important;
+                    text-align: center !important;
+                    transition: transform 0.6s !important;
+                    transform-style: preserve-3d !important;
                 }
                 
-                #experience .work-card:hover {
-                    transform: translateY(-3px) !important;
-                    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+                /* 移除手機版的hover效果 */
+                #experience .work-card:hover:not(.is-flipped) .work-card-inner {
+                    transform: rotateY(0deg) !important;
                 }
                 
-                .work-card-inner {
-                    height: auto !important;
-                    transform: none !important;
-                    transition: none !important;
+                /* 非翻轉狀態 - 正面 */
+                #experience .work-card:not(.is-flipped) .work-card-inner {
+                    transform: rotateY(0deg) !important;
+                }
+                
+                /* 翻轉狀態 - 背面（最高優先級） */
+                #experience .work-card.is-flipped .work-card-inner {
+                    transform: rotateY(180deg) !important;
+                }
+                
+                /* 確保點擊時的視覺反饋 - 改用opacity避免干擾transform */
+                #experience .work-card:active {
+                    opacity: 0.95 !important;
+                }
+                
+                /* 滑動提示 */
+                #experience .work-cards-grid::after {
+                    content: '← 左右滑動查看更多 →' !important;
+                    position: absolute !important;
+                    bottom: -20px !important;
+                    left: 50% !important;
+                    transform: translateX(-50%) !important;
+                    font-size: 0.8rem !important;
+                    color: #999 !important;
+                    white-space: nowrap !important;
+                }
+                
+                #experience .work-card-face {
+                    position: absolute !important;
+                    width: 100% !important;
+                    height: 100% !important;
+                    -webkit-backface-visibility: hidden !important;
+                    backface-visibility: hidden !important;
+                    border-radius: 20px !important;
+                    padding: 2rem 1.5rem !important;
+                    display: flex !important;
+                    flex-direction: column !important;
+                    justify-content: center !important;
+                    align-items: center !important;
+                    box-shadow: 0 4px 20px rgba(0,0,0,0.1) !important;
+                }
+                
+                /* 正面樣式 - 預設 */
+                #experience .work-card-front {
+                    background: #64748b !important;
+                    transform: rotateY(0deg) !important;
                     position: relative !important;
+                    overflow: hidden !important;
+                    color: white !important;
                 }
                 
-                /* 隱藏原本的翻轉面 */
-                .work-card-front,
-                .work-card-back {
-                    position: relative !important;
-                    transform: none !important;
-                    backface-visibility: visible !important;
+                /* 手機版卡片正面文字顏色 */
+                #experience .work-card-front .company-name,
+                #experience .work-card-front .job-title {
+                    color: white !important;
                 }
                 
-                .work-card-back {
+                /* 漸層透明白色遮罩 */
+                #experience .work-card-front::before {
+                    content: '' !important;
                     position: absolute !important;
                     top: 0 !important;
                     left: 0 !important;
-                    width: 100% !important;
-                    height: 100% !important;
-                    opacity: 0 !important;
+                    right: 0 !important;
+                    bottom: 0 !important;
+                    background: linear-gradient(135deg, 
+                        rgba(255, 255, 255, 0.3) 0%, 
+                        rgba(255, 255, 255, 0.15) 50%,
+                        rgba(255, 255, 255, 0) 100%) !important;
                     pointer-events: none !important;
+                    z-index: 1 !important;
                 }
                 
-                
-                /* 收風琴卡片 */
-                .accordion-header {
-                    display: flex !important;
-                    align-items: center !important;
-                    padding: 1rem !important;
-                    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
-                    cursor: pointer !important;
-                    border-radius: 16px !important;
-                    border: 1px solid rgba(229, 231, 235, 0.5) !important;
-                    transition: all 0.3s ease !important;
+                /* 確保內容在遮罩上方 */
+                #experience .work-card-front > * {
                     position: relative !important;
-                    overflow: visible !important;
+                    z-index: 2 !important;
                 }
                 
-                .work-card.expanded .accordion-header {
-                    background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%) !important;
-                    border-color: #667eea !important;
-                    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.12) !important;
+                /* 各公司卡片封面實色 - 優雅配色 */
+                /* 生洋網路 - 深海藍 */
+                #experience .work-card[data-company="shenyang"] .work-card-front {
+                    background: #1e40af !important;
                 }
                 
-                /* 主要內容區 */
-                .accordion-main {
-                    flex: 1 !important;
-                    display: flex !important;
-                    align-items: center !important;
-                    gap: 1rem !important;
+                /* 翰林出版 - 知識綠 */
+                #experience .work-card[data-company="hanlin"] .work-card-front {
+                    background: #059669 !important;
                 }
                 
-                .accordion-company-info {
-                    display: flex !important;
-                    align-items: center !important;
-                    flex: 1 !important;
-                    gap: 0.8rem !important;
+                /* 傑克萊兒 - 創意紫 */
+                #experience .work-card[data-company="jacklaire"] .work-card-front {
+                    background: #7c3aed !important;
                 }
                 
-                .accordion-logo {
-                    width: 50px !important;
-                    height: 50px !important;
-                    border-radius: 12px !important;
-                    overflow: hidden !important;
-                    box-shadow: 0 3px 10px rgba(0,0,0,0.08) !important;
-                    flex-shrink: 0 !important;
-                    border: 2px solid white !important;
+                /* 戰謀家 - 策略紅 */
+                #experience .work-card[data-company="warplanner"] .work-card-front {
+                    background: #dc2626 !important;
                 }
                 
-                .accordion-logo img {
-                    width: 100% !important;
-                    height: 100% !important;
-                    object-fit: cover !important;
+                /* 其他 - 商務灰 */
+                #experience .work-card[data-company="rosethink"] .work-card-front,
+                #experience .work-card:not([data-company]) .work-card-front {
+                    background: #475569 !important;
                 }
                 
-                .accordion-text-info {
-                    flex: 1 !important;
-                    display: flex !important;
-                    flex-direction: column !important;
-                    gap: 0.5rem !important;
+                /* 背面樣式 */
+                #experience .work-card-back {
+                    background: linear-gradient(135deg, #ffffff 0%, #f7fafc 100%) !important;
+                    transform: rotateY(180deg) !important;
                 }
                 
-                /* 時間標籤 */
-                .accordion-time {
-                    font-size: 0.8rem !important;
-                    color: #667eea !important;
-                    font-weight: 600 !important;
-                    display: inline-block !important;
-                    width: fit-content !important;
-                    margin-bottom: 0.3rem !important;
+                /* 收風琴樣式已移除 - 使用翻轉卡片替代 */
                 }
                 
-                /* 公司名與職位 */
-                .accordion-company-wrapper {
-                    display: flex !important;
-                    flex-direction: column !important;
-                    gap: 0.2rem !important;
-                }
-                
-                .accordion-company {
-                    font-size: 1.05rem !important;
-                    font-weight: 700 !important;
-                    color: #1a202c !important;
-                    line-height: 1.4 !important;
-                    white-space: nowrap !important;
-                    overflow: hidden !important;
-                    text-overflow: ellipsis !important;
-                    margin-bottom: 0.2rem !important;
-                }
-                
-                .accordion-position {
-                    font-size: 0.9rem !important;
-                    color: #4a5568 !important;
-                    font-weight: 500 !important;
-                    line-height: 1.3 !important;
-                }
-                
-                /* 箭頭樣式優化 */
-                .accordion-arrow {
-                    width: 20px !important;
-                    height: 20px !important;
-                    color: #a0aec0 !important;
-                    transition: all 0.3s ease !important;
-                    flex-shrink: 0 !important;
-                }
-                
-                .work-card.expanded .accordion-arrow {
-                    transform: rotate(180deg) !important;
-                    color: #667eea !important;
-                }
-                
-                .accordion-arrow {
-                    width: 24px !important;
-                    height: 24px !important;
-                    color: #667eea !important;
-                    transition: transform 0.3s ease !important;
-                }
-                
-                .work-card.expanded .accordion-arrow {
-                    transform: rotate(180deg) !important;
-                }
-                
-                /* 收風琴內容 */
-                .accordion-content {
-                    max-height: 0 !important;
-                    overflow: hidden !important;
-                    transition: max-height 0.3s ease !important;
-                    background: #fafbfc !important;
-                    border-radius: 0 0 16px 16px !important;
-                    margin: 0 1px 1px 1px !important;
-                }
-                
-                .work-card.expanded .accordion-content {
-                    max-height: 300px !important;
-                    padding: 1rem 1rem 1.2rem !important;
-                    border-top: 1px solid rgba(229, 231, 235, 0.3) !important;
-                }
+                /* 收風琴樣式已全部移除 - 改用翻轉卡片 */
                 
                 .work-card-highlights {
                     display: flex !important;
@@ -4689,16 +4734,28 @@
                     text-align: center !important;
                     margin-top: 0.5rem !important;
                 }
-            }
+            
+            /* 全域工作卡片樣式 */
             }
             
+            @media (max-width: 767px) {
             .work-card-face {
                 padding: 1.5rem !important;
             }
             
             .company-logo {
+                width: 50px !important;
                 height: 50px !important;
                 margin-bottom: 1rem !important;
+                background: rgba(255, 255, 255, 0.95) !important;
+                padding: 5px !important;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+            }
+            
+            .company-logo img {
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: contain !important;
             }
             
             .company-name {
@@ -4808,8 +4865,8 @@
             }
         }
         
-        /* 小手機版 (最大 414px) - Fixed to avoid conflict */
-        @media (max-width: 414px) {
+        /* 小手機版 (最大 480px) */
+        @media (max-width: 480px) {
             /* 更小的間距 */
             :root {
                 --space-xs: 0.25rem;
@@ -4835,74 +4892,8 @@
                 height: 350px;
             }
             
-            /* LINE禮物手機版滑動樣式 - 完整修復版 */
-            @media (max-width: 767px) {
-                #ecommerce-works #line-gifts-section {
-                    overflow-x: auto !important;
-                    overflow-y: hidden !important;
-                    -webkit-overflow-scrolling: touch !important;
-                    scroll-snap-type: x mandatory !important;
-                    scroll-behavior: smooth !important;
-                }
-                
-                /* 確保可滑動 */
-                #ecommerce-works #line-gifts-section::-webkit-scrollbar {
-                    height: 6px !important;
-                }
-                
-                #ecommerce-works #line-gifts-section::-webkit-scrollbar-track {
-                    background: rgba(255, 255, 255, 0.1) !important;
-                    border-radius: 3px !important;
-                }
-                
-                #ecommerce-works #line-gifts-section::-webkit-scrollbar-thumb {
-                    background: rgba(255, 255, 255, 0.3) !important;
-                    border-radius: 3px !important;
-                }
-            }
-            /* 續接 LINE禮物手機版樣式 */
-            @media (max-width: 767px) {
-                #ecommerce-works #line-gifts-section > div:first-child,
-                #ecommerce-works #line-gifts-section .line-images-grid {
-                    display: flex !important;
-                    flex-wrap: nowrap !important;
-                    gap: 1rem !important;
-                    min-width: max-content !important;
-                    grid-template-columns: unset !important;
-                }
-                
-                #ecommerce-works #line-gifts-section .line-item {
-                    flex: 0 0 65vw !important;
-                    min-width: 65vw !important;
-                    scroll-snap-align: start !important;
-                    height: 250px !important;
-                    position: relative !important;
-                }
-                
-                #ecommerce-works #line-gifts-section .line-item img {
-                    width: 100% !important;
-                    height: 100% !important;
-                    object-fit: contain !important;
-                    border-radius: 10px !important;
-                    background: rgba(255, 255, 255, 0.05) !important;
-                }
-                
-                #ecommerce-works #line-gifts-section .line-overlay {
-                    position: absolute !important;
-                    top: 15px !important;
-                    left: 15px !important;
-                    bottom: auto !important;
-                    background: rgba(0, 0, 0, 0.7) !important;
-                    padding: 5px 12px !important;
-                    border-radius: 15px !important;
-                }
-                
-                #ecommerce-works #line-gifts-section .line-overlay span {
-                    font-size: 0.9rem !important;
-                    color: white !important;
-                    font-weight: 600 !important;
-                }
-            }
+            /* LINE禮物標題 - 同限定活動 */
+            /* 刪除重複的line-gift-block::before規則 - 已在上方定義 */
             
             /* 專業工具運用 - 手機版第一行三個，第二行兩個置中，只顯示圖片 */
             .tools-grid {
@@ -5023,6 +5014,136 @@
             .limited-banner {
                 font-size: 0.9rem !important;
                 padding: 8px 15px !important;
+            }
+            
+            /* 手機版副標文案調整 - 維持兩行 */
+            /* 隱藏原文字，使用::after顯示精簡版 */
+            
+            /* 工作經歷 */
+            #experience .section-subtitle br {
+                display: none !important;
+            }
+            #experience .section-subtitle {
+                visibility: hidden !important;
+                position: relative !important;
+                height: auto !important;
+            }
+            #experience .section-subtitle::after {
+                content: "六年跨品牌文案出版行銷經驗\A每張牌都是我喜歡就帶走" !important;
+                visibility: visible !important;
+                position: absolute !important;
+                top: 0 !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                white-space: pre-line !important;
+                font-size: 0.95rem !important;
+                line-height: 1.5 !important;
+                text-align: center !important;
+                width: 100% !important;
+            }
+            
+            /* 亮點作品 */
+            .planning-works .section-subtitle br {
+                display: none !important;
+            }
+            .planning-works .section-subtitle {
+                visibility: hidden !important;
+                position: relative !important;
+                height: auto !important;
+            }
+            .planning-works .section-subtitle::after {
+                content: "收錄近年代表作品\A每個都是嘗試與突破" !important;
+                visibility: visible !important;
+                position: absolute !important;
+                top: 0 !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                white-space: pre-line !important;
+                font-size: 0.95rem !important;
+                line-height: 1.5 !important;
+                color: rgba(255, 255, 255, 0.9) !important;
+                text-align: center !important;
+                width: 100% !important;
+            }
+            
+            /* 社群操作 */
+            #social-media .section-subtitle br {
+                display: none !important;
+            }
+            #social-media .section-subtitle {
+                visibility: hidden !important;
+                position: relative !important;
+                height: auto !important;
+            }
+            #social-media .section-subtitle::after {
+                content: "內容策劃到社群經營\A提升品牌社群影響力" !important;
+                visibility: visible !important;
+                position: absolute !important;
+                top: 0 !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                white-space: pre-line !important;
+                font-size: 0.95rem !important;
+                line-height: 1.5 !important;
+                text-align: center !important;
+                width: 100% !important;
+            }
+            
+            /* 電商企劃 */
+            .design-gallery .gallery-subtitle br {
+                display: none !important;
+            }
+            .design-gallery .gallery-subtitle {
+                visibility: hidden !important;
+                position: relative !important;
+                height: auto !important;
+            }
+            .design-gallery .gallery-subtitle::after {
+                content: "從檔期企劃到平台操作\A為節慶規劃打動人心主題" !important;
+                visibility: visible !important;
+                position: absolute !important;
+                top: 0 !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                white-space: pre-line !important;
+                font-size: 0.95rem !important;
+                line-height: 1.5 !important;
+                color: rgba(255, 255, 255, 0.9) !important;
+                text-align: center !important;
+                width: 100% !important;
+            }
+            
+            /* 簡報資訊圖像化 */
+            .portfolio-item {
+                cursor: pointer !important;
+                position: relative !important;
+                z-index: 1 !important;
+            }
+            
+            .portfolio-overlay {
+                pointer-events: none !important;
+            }
+            
+            #presentation .section-subtitle br {
+                display: none !important;
+            }
+            #presentation .section-subtitle {
+                visibility: hidden !important;
+                position: relative !important;
+                height: auto !important;
+            }
+            #presentation .section-subtitle::after {
+                content: "教育訓練到商業簡報\A複雜訊息圖像條理化" !important;
+                visibility: visible !important;
+                position: absolute !important;
+                top: 0 !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                white-space: pre-line !important;
+                font-size: 0.95rem !important;
+                line-height: 1.5 !important;
+                text-align: center !important;
+                width: 100% !important;
             }
             
             /* 亮點作品手機版調整 */
@@ -5251,27 +5372,22 @@
                 z-index: 1 !important;
             }
             
-            /* 社群操作區塊手機版文字調整 */
-            #social-media .section-subtitle {
-                display: none !important;
-            }
-            
-            #social-media .section-header::after {
-                content: "從內容策劃到社群經營，打造消費者互動橋樑\A透過創意內容與數據分析，提升品牌社群影響力" !important;
-                white-space: pre-line !important;
-                display: block !important;
-                font-size: 0.95rem !important;
-                color: var(--gray-600) !important;
-                text-align: center !important;
-                margin: 0.5rem auto !important;
-                max-width: 90% !important;
-                line-height: 1.5 !important;
-            }
             
             /* 電商企劃區塊手機版調整 */
+            #ecommerce-works {
+                padding: 2rem 0 !important;
+                position: relative !important;
+            }
+            
             #ecommerce-works .gallery-title {
                 font-size: 2rem !important;
                 font-weight: 600 !important;
+                margin-bottom: 2rem !important;
+                padding: 0 1rem !important;
+            }
+            
+            /* 各子區塊之間的間距 */
+            #ecommerce-works .gallery-projects {
             }
             
             /* 添加區域小標題 */
@@ -5284,102 +5400,150 @@
                 text-align: center !important;
             }
             
-            /* 春節活動區塊手機版調整 - 清理版 */
-            @media (max-width: 767px) {
-                .spring-campaign-block {
-                    position: relative !important;
-                    overflow-y: visible !important;
-                    overflow-x: hidden;
-                    padding: 1rem !important;
-                    background: rgba(255, 255, 255, 0.05) !important;
-                    border-bottom: 2px solid rgba(229, 231, 235, 0.3) !important;
-                }
+            /* 春節活動區塊手機版調整 - 互動遊戲 */
+            .spring-campaign-block {
+                position: relative !important;
+                overflow-y: visible !important;
+                overflow-x: hidden;
+                margin-top: 1.5rem !important;
+                margin-bottom: 2rem !important;
+                padding: 0 0 2rem 0 !important;
+                background: transparent !important;
+                border: none !important;
+                border-radius: 0 !important;
             }
             
-            /* 限定活動區塊手機版調整 - 修復滑動功能 */
-            @media (max-width: 767px) {
-                #ecommerce-works .festival-block.limited-section {
-                    margin-top: 3rem !important;
-                    padding: 1rem 1rem 1.5rem 1rem !important;
-                    position: relative !important;
-                    overflow-x: auto !important;
-                    overflow-y: hidden !important;
-                    scroll-behavior: smooth !important;
-                    -webkit-overflow-scrolling: touch !important;
-                    scroll-snap-type: x mandatory !important;
-                }
-                
-                /* 確保可滑動 */
-                #ecommerce-works .festival-block.limited-section::-webkit-scrollbar {
-                    height: 6px !important;
-                }
-                
-                #ecommerce-works .festival-block.limited-section::-webkit-scrollbar-track {
-                    background: rgba(255, 255, 255, 0.1) !important;
-                    border-radius: 3px !important;
-                }
-                
-                #ecommerce-works .festival-block.limited-section::-webkit-scrollbar-thumb {
-                    background: rgba(255, 255, 255, 0.3) !important;
-                    border-radius: 3px !important;
-                }
+            /* 互動遊戲底部分隔線 */
+            .spring-campaign-block::after {
+                content: '' !important;
+                position: absolute !important;
+                bottom: 0 !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: 90% !important;
+                height: 3px !important;
+                background: linear-gradient(90deg, 
+                    rgba(255, 255, 255, 0) 0%, 
+                    rgba(255, 255, 255, 0.3) 10%,
+                    rgba(255, 255, 255, 0.6) 25%,
+                    rgba(255, 255, 255, 0.8) 50%, 
+                    rgba(255, 255, 255, 0.6) 75%,
+                    rgba(255, 255, 255, 0.3) 90%,
+                    rgba(255, 255, 255, 0) 100%) !important;
+                border-radius: 3px !important;
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
             }
             
-            /* 限定活動滑動內容 - 整合版 */
-            @media (max-width: 767px) {
-                #ecommerce-works .festival-block .festival-content-redesign {
-                    display: flex !important;
-                    flex-direction: row !important;
-                    gap: 1rem !important;
-                    flex-wrap: nowrap !important;
-                    min-width: max-content !important;
-                    padding: 10px !important;
-                }
-                
-                #ecommerce-works .festival-block .festival-top-row,
-                #ecommerce-works .festival-block .festival-bottom-row {
-                    display: contents !important;
-                    grid-template-columns: none !important;
-                }
-                
-                #ecommerce-works .festival-block .festival-text {
-                    display: none !important;
-                }
-                
-                #ecommerce-works .festival-block .project-card {
-                    flex: 0 0 65vw !important;
-                    min-width: 65vw !important;
-                    scroll-snap-align: start !important;
-                    height: 250px !important;
-                    position: relative !important;
-                }
-                
-                #ecommerce-works .festival-block .project-image {
-                    width: 100% !important;
-                    height: 100% !important;
-                    position: relative !important;
-                }
-                
-                #ecommerce-works .festival-block .project-image img {
-                    width: 100% !important;
-                    height: 100% !important;
-                    object-fit: contain !important;
-                    border-radius: 10px !important;
-                    background: rgba(255, 255, 255, 0.05) !important;
-                }
-                
-                #ecommerce-works .festival-block .activity-label {
-                    position: absolute !important;
-                    top: 15px !important;
-                    left: 15px !important;
-                    bottom: auto !important;
-                    background: rgba(0, 0, 0, 0.7) !important;
-                    color: white !important;
-                    padding: 5px 12px !important;
-                    border-radius: 15px !important;
-                    font-size: 0.9rem !important;
-                    font-weight: 600 !important;
-                }
+            .spring-campaign-block::before {
+                content: "互動遊戲" !important;
+                display: block !important;
+                font-size: 1.2rem !important;
+                font-weight: 700 !important;
+                color: white !important;
+                margin-bottom: 1rem !important;
+                padding: 0 1rem !important;
+                text-align: left !important;
+                position: relative !important;
+                letter-spacing: 0.5px !important;
+            }
+            
+            /* 限定活動區塊手機版調整 */
+            #ecommerce-works .festival-block.limited-section {
+                margin-top: 1rem !important;
+                padding: 0 !important;
+                position: relative !important;
+                background: transparent !important;
+                border: none !important;
+                border-radius: 0 !important;
+            }
+            
+            /* 限定活動底部分隔線 */
+            #ecommerce-works .festival-block.limited-section::after {
+                content: '' !important;
+                position: absolute !important;
+                bottom: 0 !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: 90% !important;
+                height: 3px !important;
+                background: linear-gradient(90deg, 
+                    rgba(255, 255, 255, 0) 0%, 
+                    rgba(255, 255, 255, 0.3) 10%,
+                    rgba(255, 255, 255, 0.6) 25%,
+                    rgba(255, 255, 255, 0.8) 50%, 
+                    rgba(255, 255, 255, 0.6) 75%,
+                    rgba(255, 255, 255, 0.3) 90%,
+                    rgba(255, 255, 255, 0) 100%) !important;
+                border-radius: 3px !important;
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
+            }
+            
+            .festival-block.limited-section::before {
+                content: "限定活動" !important;
+                display: block !important;
+                font-size: 1.2rem !important;
+                font-weight: 700 !important;
+                color: white !important;
+                margin-bottom: 1rem !important;
+                padding: 0 1rem !important;
+                text-align: left !important;
+                position: relative !important;
+                letter-spacing: 0.5px !important;
+            }
+            
+            /* 限定活動滑動內容 */
+            #ecommerce-works .festival-block .festival-content-redesign {
+                display: flex !important;
+                flex-direction: row !important;
+                gap: 1rem !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
+                overflow-y: hidden !important;
+                -webkit-overflow-scrolling: touch !important;
+                scroll-behavior: smooth !important;
+                padding: 0 1rem !important;
+            }
+            
+            /* 隱藏限定活動滾動條 */
+            #ecommerce-works .festival-block .festival-content-redesign::-webkit-scrollbar {
+                display: none !important;
+            }
+            
+            #ecommerce-works .festival-block .festival-top-row,
+            #ecommerce-works .festival-block .festival-bottom-row {
+                display: contents !important;
+                grid-template-columns: none !important;
+            }
+            
+            #ecommerce-works .festival-block .festival-text {
+                display: none !important;
+            }
+            
+            #ecommerce-works .festival-block .project-card {
+                flex: 0 0 70vw !important;
+                min-width: 70vw !important;
+                max-width: 70vw !important;
+                height: 250px !important;
+                position: relative !important;
+            }
+            
+            #ecommerce-works .festival-block .project-image {
+                width: 100% !important;
+                height: 100% !important;
+                position: relative !important;
+            }
+            
+            #ecommerce-works .festival-block .project-image img {
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: contain !important;
+                border-radius: 10px !important;
+                background: rgba(255, 255, 255, 0.05) !important;
+            }
+            
+            /* 手機版隱藏限定活動圖片文案 */
+            #ecommerce-works .festival-block .activity-label {
+                display: none !important;
             }
             
             /* 好命財攻略圖片滑動容器 */
@@ -5411,189 +5575,159 @@
                 border-radius: 15px !important;
             }
             
-            /* 手機版電商企劃區塊 - 完整修復版 */
-            @media screen and (max-width: 767px) {
-                /* 電商企劃整體容器調整 */
-                #ecommerce-works {
-                    padding-bottom: 2rem !important;
-                    margin-bottom: 0 !important;
+            /* 手機版電商企劃區塊標題 - 放在色塊框之上 */
+            /* 互動遊戲區塊 - 手機版 */
+            #ecommerce-works .mobile-spring-container {
+                    position: relative !important;
+                    margin-top: 1.5rem !important;
                     overflow: visible !important;
                 }
                 
-                #ecommerce-works .gallery-container,
-                #ecommerce-works .gallery-projects {
+                /* 刪除重複的互動遊戲標題 - 已在.spring-campaign-block::before定義 */
+                
+                /* 限定活動區塊 - 電腦版和手機版共用 */
+                #ecommerce-works .limited-section {
+                    position: relative !important;
+                    margin-top: 3rem !important;
                     overflow: visible !important;
                 }
                 
-                /* ========== 互動遊戲區塊 ========== */
-                #ecommerce-works .spring-campaign-block {
-                    position: relative !important;
-                    padding: 2rem 1rem 1rem 1rem !important;
-                    margin: 2rem 0 !important;
-                    background: rgba(255, 255, 255, 0.05) !important;
-                    border-radius: 15px !important;
-                }
-                
-                #ecommerce-works .spring-campaign-block::before {
-                    content: "互動遊戲" !important;
-                    display: block !important;
-                    position: absolute !important;
-                    top: -1.5rem !important;
-                    left: 1rem !important;
-                    font-size: 1.1rem !important;
-                    color: white !important;
-                    font-weight: 600 !important;
-                    background: transparent !important;
-                    z-index: 100 !important;
-                }
-                
-                /* ========== 限定活動區塊 ========== */
-                #ecommerce-works .festival-block.limited-section {
-                    position: relative !important;
-                    padding: 2rem 1rem 1rem 1rem !important;
-                    margin: 2rem 0 !important;
-                    overflow-x: auto !important;
-                    overflow-y: hidden !important;
-                    background: rgba(255, 255, 255, 0.05) !important;
-                    border-radius: 15px !important;
-                }
-                
-                #ecommerce-works .festival-block.limited-section::before {
-                    content: "限定活動" !important;
-                    display: block !important;
-                    position: absolute !important;
-                    top: -1.5rem !important;
-                    left: 1rem !important;
-                    font-size: 1.1rem !important;
-                    color: white !important;
-                    font-weight: 600 !important;
-                    background: transparent !important;
-                    z-index: 100 !important;
-                }
-                
-                /* ========== LINE禮物區塊 ========== */
+                /* 刪除重複的limited-section::before規則 - 已在上方定義 */
+            
+                /* LINE禮物區塊 - 電腦版和手機版共用 */
                 #ecommerce-works #line-gifts-section {
                     position: relative !important;
-                    padding: 2rem 1rem 1rem 1rem !important;
-                    margin: 2rem 0 !important;
-                    overflow-x: auto !important;
-                    overflow-y: hidden !important;
-                    background: rgba(255, 255, 255, 0.05) !important;
-                    border-radius: 15px !important;
+                    margin-top: 3rem !important;
+                    overflow: visible !important;
                 }
                 
                 #ecommerce-works #line-gifts-section::before {
                     content: "LINE禮物" !important;
                     display: block !important;
-                    position: absolute !important;
-                    top: -1.5rem !important;
-                    left: 1rem !important;
-                    font-size: 1.1rem !important;
+                    font-size: 1.2rem !important;
+                    font-weight: 700 !important;
                     color: white !important;
-                    font-weight: 600 !important;
-                    background: transparent !important;
-                    z-index: 100 !important;
+                    margin-bottom: 1rem !important;
+                    padding: 0 1rem !important;
+                    text-align: left !important;
+                    position: relative !important;
+                    letter-spacing: 0.5px !important;
                 }
                 
-                /* 下方區塊間距 */
+                /* 電商企劃與下方內容間距調整 */
+                #ecommerce-works {
+                    padding-bottom: 2rem !important;
+                    margin-bottom: 0 !important;
+                    overflow: visible !important; /* 讓小標可以顯示在色塊外 */
+                }
+                
+                #ecommerce-works .gallery-container {
+                    overflow: visible !important;
+                }
+                
+                #ecommerce-works .gallery-projects {
+                    overflow: visible !important;
+                }
+                
                 #presentation {
-                    margin-top: 2rem !important;
-                    padding-top: 2rem !important;
+                    margin-top: 0 !important;
+                    padding-top: 3rem !important;
                 }
+            
+            /* 手機版必須顯示展開按鈕 - 覆蓋預設隱藏 */
+            .expand-toggle {
+                display: inline-block !important;
+            }
+        }  /* 結束主要手機版媒體查詢 @media (max-width: 767px) */
+        
+        /* ===============================================
+           全局樣式（電腦版和手機版共用）
+           =============================================== */
+            
+        /* 控制電腦版和手機版顯示 */
+        /* 電腦版預設顯示 */
+        .desktop-only {
+            display: flex;
+        }
+        .mobile-only {
+            display: none;
+        }
+        
+        /* 電腦版社群容器 - 確保在電腦版顯示 */
+        @media (min-width: 768px) {
+            #social-media .social-triple-container {
+                display: block !important;
+                position: relative !important;
+                margin-top: 2rem !important;
+                max-width: 1200px !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                padding: 0 70px !important;
+                box-sizing: border-box !important;
+            }
+            #social-media .social-mobile-container {
+                display: none !important;
             }
             
-            /* ===== 緊急修復區塊 - 手機版關鍵問題 ===== */
-            @media (max-width: 767px) {
-                /* 1. 修復工作經歷內容 */
-                .work-card-back {
-                    opacity: 1 !important;
-                    visibility: visible !important;
-                    display: block !important;
-                }
-                
-                /* 2. 修復展開按鈕 */
-                .expand-toggle {
-                    display: inline-block !important;
-                    visibility: visible !important;
-                    opacity: 1 !important;
-                }
-                
-                /* 3. 修復電商企劃重疊 */
-                #ecommerce-works .spring-campaign-block {
-                    margin-bottom: 2rem !important;
-                }
-                
-                #ecommerce-works .festival-block.limited-section {
-                    margin-bottom: 2rem !important;
-                }
-                
-                #ecommerce-works #line-gifts-section {
-                    margin-bottom: 2rem !important;
-                }
-                
-                /* 4. 確保小標可見 */
-                #ecommerce-works .spring-campaign-block::before,
-                #ecommerce-works .festival-block.limited-section::before,
-                #ecommerce-works #line-gifts-section::before {
-                    display: block !important;
-                    opacity: 1 !important;
-                    visibility: visible !important;
-                }
+            /* 恢復電腦版的 carousel 樣式 */
+            #social-media .social-carousel-track {
+                overflow: hidden !important;
+                overflow-y: visible !important;
+                width: 100% !important;
             }
             
-            /* 控制電腦版和手機版顯示 */
-            /* 電腦版預設顯示 */
-            .desktop-only {
+            #social-media .social-carousel-wrapper {
                 display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                gap: 30px !important;
             }
+            
+            #social-media .social-group-wrapper {
+                min-width: calc((100% - 60px) / 3) !important;
+                flex: 0 0 calc((100% - 60px) / 3) !important;
+                display: inline-flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                vertical-align: top !important;
+            }
+            
+            /* 顯示導航按鈕 */
+            #social-media .social-carousel-nav {
+                display: flex !important;
+                position: absolute !important;
+                top: 50% !important;
+                transform: translateY(-50%) !important;
+            }
+            
+            #social-media .social-carousel-prev {
+                left: 10px !important;
+            }
+            
+            #social-media .social-carousel-next {
+                right: 10px !important;
+            }
+        }
+        
+        /* 手機版切換顯示 */
+        @media (max-width: 767px) {
+            .desktop-only {
+                display: none !important;
+            }
+            
             .mobile-only {
-                display: none !important;
-            }
-            
-            /* 手機版切換顯示 */
-            @media (max-width: 767px) {
-                .desktop-only {
-                    display: none !important;
-                }
-                
-                .mobile-only {
-                    display: block !important;
-                }
-            }
-            
-            /* 簡報資訊圖象化區塊手機版文字調整 */
-            #presentation .section-subtitle {
-                display: none !important;
-            }
-            
-            #presentation .section-header::after {
-                content: "無論是教育訓練、品牌提案、商業簡報或簡易動畫\A均可將複雜的訊息圖像化、條理化" !important;
-                white-space: pre-line !important;
                 display: block !important;
-                font-size: 0.95rem !important;
-                color: var(--gray-600) !important;
-                text-align: center !important;
-                margin: 0.5rem auto 1.5rem !important;
-                max-width: 90% !important;
-                line-height: 1.5 !important;
             }
             
-            /* 工作經歷區塊手機版文字調整 */
-            #experience .section-subtitle {
+            #social-media .social-triple-container {
                 display: none !important;
             }
             
-            #experience .section-header::after {
-                content: "六年以上橫跨品牌、文案、出版、數位的整合經驗\A每張牌都是我，翻開來喜歡就帶走" !important;
-                white-space: pre-line !important;
-                display: block !important;
-                font-size: 0.95rem !important;
-                color: var(--gray-600) !important;
-                text-align: center !important;
-                margin: 0.5rem auto 1.5rem !important;
-                max-width: 90% !important;
-                line-height: 1.5 !important;
-            }
+            
+            
+            
+            
             
             /* 修復手機版關於我區域超出版面 */
             .about-section {
@@ -5703,14 +5837,14 @@
             }
             
             /* 社群操作手機版重新設計 */
-            #social-media .social-triple-container {
-                display: none !important;
-            }
             
             /* 手機版社群操作容器 */
-            .social-mobile-container {
+            #social-media .social-mobile-container {
                 display: block !important;
-                padding: 1rem !important;
+                padding: 0.2rem !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
             }
             
             /* 分類標籤 */
@@ -5750,41 +5884,62 @@
                 border-color: transparent !important;
             }
             
-            /* 內容網格 */
+            /* 內容網格 - 預設隱藏所有內容 */
             .social-mobile-content {
                 display: none !important;
             }
             
+            /* 只顯示有 active 類的內容 */
             .social-mobile-content.active {
                 display: grid !important;
                 grid-template-columns: repeat(2, 1fr) !important;
-                gap: 0.8rem !important;
+                gap: 1rem !important;
+                animation: fadeIn 0.3s ease;
+                padding: 0.5rem !important;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
             }
             
             .social-mobile-item {
                 position: relative !important;
-                border-radius: 12px !important;
+                border-radius: 10px !important;
                 overflow: hidden !important;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
                 aspect-ratio: 1 !important;
+                background: white !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                cursor: pointer !important;
+                transition: all 0.3s ease !important;
+                width: 100% !important;
+                height: auto !important;
+            }
+            
+            .social-mobile-item:active {
+                transform: scale(1.05) !important;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+                z-index: 10 !important;
             }
             
             .social-mobile-item img {
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
                 width: 100% !important;
                 height: 100% !important;
-                object-fit: cover !important;
+                object-fit: contain !important;
+                object-position: center !important;
+                background: white !important;
+                z-index: 1 !important;
+                box-sizing: border-box !important;
             }
             
             .social-mobile-overlay {
-                position: absolute !important;
-                bottom: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
-                background: linear-gradient(to top, rgba(0,0,0,0.8), transparent) !important;
-                color: white !important;
-                padding: 1rem 0.8rem 0.8rem !important;
-                font-size: 0.85rem !important;
-                line-height: 1.3 !important;
+                display: none !important;
             }
             
             /* 查看更多按鈕 */
@@ -5792,29 +5947,36 @@
                 display: block !important;
                 width: 100% !important;
                 padding: 0.8rem !important;
-                margin-top: 1rem !important;
+                margin: 1rem 0 0 !important;
                 background: linear-gradient(135deg, #3B82F6, #1E3A8A) !important;
                 color: white !important;
                 border: none !important;
                 border-radius: 12px !important;
                 font-size: 0.95rem !important;
                 cursor: pointer !important;
-                transition: transform 0.3s ease !important;
+                transition: all 0.3s ease !important;
+                position: relative !important;
+                z-index: 10 !important;
+            }
+            
+            .social-view-more:hover {
+                transform: translateY(-2px) !important;
+                box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4) !important;
             }
             
             .social-view-more:active {
                 transform: scale(0.98) !important;
             }
             
-            /* 舊的修復代碼 */
-            .social-triple-container {
+            /* 手機版舊的修復代碼 - 只在手機版社群容器存在時應用 */
+            #social-media .social-triple-container {
                 position: relative !important;
                 width: 100% !important;
                 overflow: visible !important;
                 padding: 0 !important;
             }
             
-            .social-carousel-track {
+            #social-media .social-carousel-track {
                 overflow-x: auto !important;
                 overflow-y: visible !important;
                 -webkit-overflow-scrolling: touch !important;
@@ -5822,21 +5984,21 @@
                 padding: 0 10px !important;
             }
             
-            .social-carousel-wrapper {
+            #social-media .social-carousel-wrapper {
                 display: flex !important;
                 flex-wrap: nowrap !important;
                 gap: 1rem !important;
                 padding-bottom: 15px !important;
             }
             
-            .social-group-wrapper {
+            #social-media .social-group-wrapper {
                 flex: 0 0 280px !important;
                 min-width: 280px !important;
                 width: 280px !important;
             }
             
             /* 隱藏導航按鈕，使用滑動 */
-            .social-carousel-nav {
+            #social-media .social-carousel-nav {
                 display: none !important;
             }
             
@@ -5968,7 +6130,7 @@
                     <!-- 專業技能 -->
                     <div class="professional-skills" style="margin: 0 0 3rem 0;">
                         <h3 style="color: #2d3748; margin-bottom: 1rem; font-size: 1.3rem; font-weight: 700; text-align: center;">核心專業技能</h3>
-                        <div style="display: flex; flex-wrap: nowrap; gap: 1.2rem; justify-content: center; align-items: center; padding: 0 1rem;">
+                        <div style="display: flex; flex-wrap: nowrap; justify-content: center; align-items: center; padding: 0 1rem;">
                             <!-- 品牌策略 -->
                             <div style="position: relative; transition: transform 0.3s ease;">
                                 <div class="skill-circle" style="width: 100px; height: 100px; border-radius: 50%; background: white; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2); display: flex; align-items: center; justify-content: center; position: relative; border: 3px solid transparent; background-clip: padding-box; background-image: linear-gradient(white, white), linear-gradient(135deg, #667eea, #764ba2); background-origin: border-box; background-clip: padding-box, border-box; cursor: pointer; transition: all 0.3s ease;">
@@ -6118,7 +6280,7 @@
         </p>
         <div class="work-grid">
             <!-- 生洋網路 - 品牌企劃 -->
-            <div class="work-card">
+            <div class="work-card" data-company="shenyang">
                 <div class="work-card-inner">
                     <div class="work-card-face work-card-front" style="background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);">
                         <div class="company-logo">
@@ -6137,7 +6299,7 @@
             </div>
 
             <!-- 生洋網路 - 電商企劃 -->
-            <div class="work-card">
+            <div class="work-card" data-company="shenyang">
                 <div class="work-card-inner">
                     <div class="work-card-face work-card-front" style="background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);">
                         <div class="company-logo">
@@ -6156,7 +6318,7 @@
             </div>
 
             <!-- 翰林出版 -->
-            <div class="work-card">
+            <div class="work-card" data-company="hanlin">
                 <div class="work-card-inner">
                     <div class="work-card-face work-card-front" style="background: linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%);">
                         <div class="company-logo">
@@ -6175,7 +6337,7 @@
             </div>
 
             <!-- 傑克萊兒 -->
-            <div class="work-card">
+            <div class="work-card" data-company="jacklaire">
                 <div class="work-card-inner">
                     <div class="work-card-face work-card-front" style="background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);">
                         <div class="company-logo">
@@ -6194,7 +6356,7 @@
             </div>
 
             <!-- 戰謀家 -->
-            <div class="work-card">
+            <div class="work-card" data-company="warplanner">
                 <div class="work-card-inner">
                     <div class="work-card-face work-card-front" style="background: linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%);">
                         <div class="company-logo">
@@ -6289,7 +6451,7 @@
             </div>
             
             <!-- Mobile Container -->
-            <div class="social-mobile-container mobile-only" style="display: none;">
+            <div class="social-mobile-container mobile-only">
                 <div class="social-mobile-tabs">
                     <button class="social-tab active" data-category="food">展覽文案</button>
                     <button class="social-tab" data-category="cycle">活動抽獎</button>
@@ -6318,9 +6480,21 @@
                         <img src="food-expo-4.jpg" alt="掌握生產效率的好時機">
                         <div class="social-mobile-overlay">掌握生產效率的好時機</div>
                     </div>
+                    <div class="social-mobile-item">
+                        <img src="food-expo-5.jpg" alt="食品安全新標準">
+                        <div class="social-mobile-overlay">食品安全新標準</div>
+                    </div>
+                    <div class="social-mobile-item">
+                        <img src="food-expo-6.jpg" alt="智慧製造解決方案">
+                        <div class="social-mobile-overlay">智慧製造解決方案</div>
+                    </div>
+                    <div class="social-mobile-item">
+                        <img src="food-expo-7.jpg" alt="永續包裝新趨勢">
+                        <div class="social-mobile-overlay">永續包裝新趨勢</div>
+                    </div>
                 </div>
                 
-                <!-- 活動抽獎 #台北自行車展 -->
+                <!-- 活動抽獎 -->
                 <div class="social-mobile-content" data-content="cycle">
                     <div class="social-mobile-item">
                         <img src="by-expo-1.jpg" alt="城市漫遊路線推薦">
@@ -6336,106 +6510,106 @@
                     </div>
                 </div>
                 
-                <!-- 教育產業 #時雨中學 -->
+                <!-- 教育產業 -->
                 <div class="social-mobile-content" data-content="shiyu">
                     <div class="social-mobile-item">
-                        <img src="時雨1.JPG" alt="招生資訊宣傳">
-                        <div class="social-mobile-overlay">招生資訊宣傳</div>
+                        <img src="時雨1.JPG" alt="時雨中學招生">
+                        <div class="social-mobile-overlay">時雨中學招生文案</div>
                     </div>
                     <div class="social-mobile-item">
-                        <img src="時雨2.JPG" alt="校園活動介紹">
-                        <div class="social-mobile-overlay">校園活動介紹</div>
+                        <img src="時雨2.JPG" alt="時雨中學特色">
+                        <div class="social-mobile-overlay">時雨中學特色介紹</div>
                     </div>
                     <div class="social-mobile-item">
-                        <img src="時雨3.JPG" alt="學生成果展示">
-                        <div class="social-mobile-overlay">學生成果展示</div>
+                        <img src="時雨3.JPG" alt="時雨中學活動">
+                        <div class="social-mobile-overlay">時雨中學校園活動</div>
                     </div>
                 </div>
                 
-                <!-- 醫療診所 #李駿揚牙醫 -->
+                <!-- 醫療診所 -->
                 <div class="social-mobile-content" data-content="dental">
                     <div class="social-mobile-item">
-                        <img src="牙醫1.JPG" alt="美白牙齒療程介紹">
+                        <img src="牙醫1.JPG" alt="李駿揚牙醫 - 美白牙齒療程介紹">
                         <div class="social-mobile-overlay">美白牙齒療程介紹</div>
                     </div>
                     <div class="social-mobile-item">
-                        <img src="牙醫2.JPG" alt="Fashion Tooth品牌官網">
+                        <img src="牙醫2.JPG" alt="李駿揚牙醫 - Fashion Tooth品牌官網">
                         <div class="social-mobile-overlay">Fashion Tooth品牌官網</div>
                     </div>
                     <div class="social-mobile-item">
-                        <img src="牙醫3.JPG" alt="時尚牙齒雜誌設計">
+                        <img src="牙醫3.JPG" alt="李駿揚牙醫 - 時尚牙齒雜誌設計">
                         <div class="social-mobile-overlay">時尚牙齒雜誌設計</div>
                     </div>
                     <div class="social-mobile-item">
-                        <img src="牙醫4.JPG" alt="邀請卡設計">
+                        <img src="牙醫4.JPG" alt="李駿揚牙醫 - 邀請卡設計">
                         <div class="social-mobile-overlay">邀請卡設計</div>
                     </div>
                 </div>
                 
-                <!-- 建築材料 #盟鑫金屬 -->
+                <!-- 建築材料 -->
                 <div class="social-mobile-content" data-content="construction">
                     <div class="social-mobile-item">
-                        <img src="盟鑫1.JPG" alt="不鏽鋼迷思破解">
+                        <img src="盟鑫1.JPG" alt="盟鑫金屬 - 不鏽鋼迷思破解">
                         <div class="social-mobile-overlay">不鏽鋼迷思破解</div>
                     </div>
                     <div class="social-mobile-item">
-                        <img src="盟鑫2.JPG" alt="經營優勢介紹">
+                        <img src="盟鑫2.JPG" alt="盟鑫金屬 - 經營優勢介紹">
                         <div class="social-mobile-overlay">經營優勢介紹</div>
                     </div>
                     <div class="social-mobile-item">
-                        <img src="盟鑫3.JPG" alt="太陽光電工程案例">
+                        <img src="盟鑫3.JPG" alt="盟鑫金屬 - 太陽光電工程案例">
                         <div class="social-mobile-overlay">太陽光電工程案例</div>
                     </div>
                     <div class="social-mobile-item">
-                        <img src="盟鑫4.JPG" alt="全球專業客製化服務">
+                        <img src="盟鑫4.JPG" alt="盟鑫金屬 - 全球專業客製化服務">
                         <div class="social-mobile-overlay">全球專業客製化服務</div>
                     </div>
                 </div>
                 
-                <!-- 設計公司 #映品形象 -->
+                <!-- 設計公司 -->
                 <div class="social-mobile-content" data-content="design">
                     <div class="social-mobile-item">
-                        <img src="映品1.JPG" alt="白青長茶品牌設計">
+                        <img src="映品1.JPG" alt="映品形象 - 白青長茶品牌設計">
                         <div class="social-mobile-overlay">白青長茶品牌設計</div>
                     </div>
                     <div class="social-mobile-item">
-                        <img src="映品2.JPG" alt="冒險時光任務包">
+                        <img src="映品2.JPG" alt="映品形象 - 冒險時光任務包">
                         <div class="social-mobile-overlay">冒險時光任務包</div>
                     </div>
                     <div class="social-mobile-item">
-                        <img src="映品3.JPG" alt="梁膳口噴包裝設計">
+                        <img src="映品3.JPG" alt="映品形象 - 梁膳口噴包裝設計">
                         <div class="social-mobile-overlay">梁膳口噴包裝設計</div>
                     </div>
                     <div class="social-mobile-item">
-                        <img src="映品4.JPG" alt="K38 GO HI MART明日超商">
+                        <img src="映品4.JPG" alt="映品形象 - K38 GO HI MART明日超商">
                         <div class="social-mobile-overlay">K38 GO HI MART明日超商</div>
                     </div>
                     <div class="social-mobile-item">
-                        <img src="映品5.JPG" alt="診療單視覺設計">
-                        <div class="social-mobile-overlay">診療單視覺設計</div>
+                        <img src="映品5.JPG" alt="映品形象 - 企業識別設計">
+                        <div class="social-mobile-overlay">企業識別設計</div>
                     </div>
                     <div class="social-mobile-item">
-                        <img src="映品6.JPG" alt="島嶼旅程禮盒設計">
-                        <div class="social-mobile-overlay">島嶼旅程禮盒設計</div>
+                        <img src="映品6.JPG" alt="映品形象 - 展場視覺設計">
+                        <div class="social-mobile-overlay">展場視覺設計</div>
                     </div>
                 </div>
                 
-                <!-- 嬰幼品牌 #pixsee智慧寶寶攝影機 -->
+                <!-- 嬰幼品牌 -->
                 <div class="social-mobile-content" data-content="pixsee">
                     <div class="social-mobile-item">
-                        <img src="PC1.jpg" alt="天生的嗎?親子故事">
+                        <img src="PC1.jpg" alt="pixsee智慧寶寶攝影機 - 天生的嗎?親子故事">
                         <div class="social-mobile-overlay">天生的嗎?親子故事</div>
                     </div>
                     <div class="social-mobile-item">
-                        <img src="PC2.jpg" alt="得獎名單公布">
+                        <img src="PC2.jpg" alt="pixsee智慧寶寶攝影機 - 得獎名單公布">
                         <div class="social-mobile-overlay">得獎名單公布</div>
                     </div>
                     <div class="social-mobile-item">
-                        <img src="PC3.jpg" alt="育兒大詞窯活動">
+                        <img src="PC3.jpg" alt="pixsee智慧寶寶攝影機 - 育兒大詞窯活動">
                         <div class="social-mobile-overlay">育兒大詞窯活動</div>
                     </div>
                     <div class="social-mobile-item">
-                        <img src="PC4.jpg" alt="親子問答互動">
+                        <img src="PC4.jpg" alt="pixsee智慧寶寶攝影機 - 親子問答互動">
                         <div class="social-mobile-overlay">親子問答互動</div>
                     </div>
                 </div>
@@ -6734,6 +6908,7 @@
                     </div>
                 </div>
             </div>
+            
             <!-- Expanded Content Area -->
             <div class="social-expanded-content" id="socialExpandedContent">
                 <div class="expanded-items-container" id="expandedItemsContainer">
@@ -6856,45 +7031,47 @@
             <div class="gallery-projects" style="margin-top: 3rem;">
                 <div class="project-group line-gifts full-width">
                     <div class="line-gift-block" id="line-gifts-section">
-                        <div class="line-images-grid">
-                            <div class="line-item">
-                                <img src="line/LINE(1).jpg" alt="真心誠意禮系列">
-                                <div class="line-overlay">
-                                    <span>真心誠意禮</span>
+                        <div class="line-gift-wrapper">
+                            <div class="line-gift-first-row">
+                                <div class="campaign-header-side">
+                                    <h3 class="campaign-title-side" style="color: white !important; -webkit-text-fill-color: white !important; margin-bottom: 1rem;">LINE禮物</h3>
+                                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; font-size: 0.95rem;">官方合作電商平台行銷視覺</p>
+                                    <div class="campaign-tags-side">
+                                        <span class="tag-item-side">情境文案</span>
+                                        <span class="tag-item-side">送禮企劃</span>
+                                    </div>
+                                </div>
+                                <div class="line-item">
+                                    <img src="line/LINE(1).jpg" alt="真心誠意禮系列">
+                                    <div class="line-overlay">
+                                        <span>真心誠意禮</span>
+                                    </div>
+                                </div>
+                                <div class="line-item">
+                                    <img src="line/LINE(3).jpg" alt="即時救援系列">
+                                    <div class="line-overlay">
+                                        <span>即時救援</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="line-item">
-                                <img src="line/LINE(3).jpg" alt="即時救援系列">
-                                <div class="line-overlay">
-                                    <span>即時救援</span>
+                            <div class="line-images-grid">
+                                <div class="line-item">
+                                    <img src="line/LINE(4).jpg" alt="感情助攻禮系列">
+                                    <div class="line-overlay">
+                                        <span>感情助攻禮</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="campaign-header-side" style="padding: 2rem; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 15px; min-height: 100%;">
-                                <h3 class="campaign-title-side" style="color: white !important; -webkit-text-fill-color: white !important; margin-bottom: 1rem; text-align: center;">LINE禮物</h3>
-                                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; font-size: 0.95rem; text-align: center;">官方合作電商平台行銷視覺</p>
-                                <div class="campaign-tags-side" style="justify-content: center;">
-                                    <span class="tag-item-side">情境文案</span>
-                                    <span class="tag-item-side">送禮企劃</span>
+                                <div class="line-item">
+                                    <img src="line/LINE(5).jpg" alt="職場神隊友系列">
+                                    <div class="line-overlay">
+                                        <span>職場神隊友</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="line-images-grid" style="grid-template-columns: repeat(3, 1fr);">
-                            <div class="line-item">
-                                <img src="line/LINE(4).jpg" alt="感情助攻禮系列">
-                                <div class="line-overlay">
-                                    <span>感情助攻禮</span>
-                                </div>
-                            </div>
-                            <div class="line-item">
-                                <img src="line/LINE(5).jpg" alt="職場神隊友系列">
-                                <div class="line-overlay">
-                                    <span>職場神隊友</span>
-                                </div>
-                            </div>
-                            <div class="line-item">
-                                <img src="line/line41.jpg" alt="12星座禮系列">
-                                <div class="line-overlay">
-                                    <span>12星座禮</span>
+                                <div class="line-item">
+                                    <img src="line/line41.jpg" alt="12星座禮系列">
+                                    <div class="line-overlay">
+                                        <span>12星座禮</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -6908,7 +7085,7 @@
     <section id="presentation" class="presentation-portfolio">
         <div class="section-header">
             <span class="section-label">Information Visualization</span>
-            <h2 class="section-title">簡報資訊圖象化</h2>
+            <h2 class="section-title">簡報資訊圖像化</h2>
         </div>
         <p class="section-subtitle">
             無論是教育訓練、品牌提案，還是商業簡報與簡易動畫<br>
@@ -7583,29 +7760,35 @@
         
         // 初始化已經在setupPlanningCarousel中完成
 
-        // Portfolio items modal
+        // Portfolio items modal with null checks
         const portfolioItems = document.querySelectorAll('.portfolio-item');
         const modal = document.getElementById('modal');
         const modalImage = document.getElementById('modalImage');
         const modalClose = document.querySelector('.modal-close');
 
-        portfolioItems.forEach(item => {
-            item.addEventListener('click', function() {
-                const fullImage = this.dataset.full;
-                modalImage.src = fullImage;
-                modal.classList.add('active');
+        if (portfolioItems.length > 0 && modal) {
+            portfolioItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const fullImage = this.dataset.full;
+                    if (modalImage && fullImage) {
+                        modalImage.src = fullImage;
+                    }
+                    modal.classList.add('active');
+                });
             });
-        });
 
-        modalClose.addEventListener('click', function() {
-            modal.classList.remove('active');
-        });
-
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                modal.classList.remove('active');
+            if (modalClose) {
+                modalClose.addEventListener('click', function() {
+                    modal.classList.remove('active');
+                });
             }
-        });
+
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        }
 
         // Smooth scroll for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -7623,13 +7806,28 @@
 
         // 初始化輪播已經在setupPlanningCarousel中完成
 
-        // Work cards flip functionality
-        const workCards = document.querySelectorAll('.work-card');
-        workCards.forEach(card => {
-            card.addEventListener('click', function() {
-                this.classList.toggle('is-flipped');
-            });
-        });
+        // Work cards flip functionality for desktop only
+        function initWorkCardsFlip() {
+            if (window.innerWidth > 767) {
+                const workCards = document.querySelectorAll('.work-card');
+                workCards.forEach(card => {
+                    // Only add flip for desktop
+                    if (!card.hasAttribute('data-flip-listener')) {
+                        card.setAttribute('data-flip-listener', 'true');
+                        card.addEventListener('click', function(e) {
+                            // Prevent flip on mobile or if accordion header is clicked
+                            if (window.innerWidth > 767 && !e.target.closest('.accordion-header')) {
+                                this.classList.toggle('is-flipped');
+                            }
+                        });
+                    }
+                });
+            }
+        }
+        
+        // Initialize on load
+        initWorkCardsFlip();
+        window.addEventListener('resize', initWorkCardsFlip);
 
         // Function to show expanded content below
         function showExpandedContent(stackId) {
@@ -7700,54 +7898,32 @@
             showExpandedContent('pixseeStack');
         }
 
-        // Click on stacked cards to expand
-        document.getElementById('socialStack').addEventListener('click', function(e) {
-            if (!this.classList.contains('expanded') && !e.target.classList.contains('expand-btn')) {
-                toggleSocialStack();
-            }
-        });
+        // Safe event listener attachment for social stacks
+        function attachSocialStackListeners() {
+            const stacks = [
+                { id: 'socialStack', toggle: toggleSocialStack },
+                { id: 'cycleStack', toggle: toggleCycleStack },
+                { id: 'shiyuStack', toggle: toggleShiyuStack },
+                { id: 'dentalStack', toggle: toggleDentalStack },
+                { id: 'constructionStack', toggle: toggleConstructionStack },
+                { id: 'designStack', toggle: toggleDesignStack },
+                { id: 'pixseeStack', toggle: togglePixseeStack }
+            ];
+            
+            stacks.forEach(({ id, toggle }) => {
+                const element = document.getElementById(id);
+                if (element && typeof toggle === 'function') {
+                    element.addEventListener('click', function(e) {
+                        if (!this.classList.contains('expanded') && !e.target.classList.contains('expand-btn')) {
+                            toggle();
+                        }
+                    });
+                }
+            });
+        }
         
-        // Click on cycle stacked cards to expand
-        document.getElementById('cycleStack').addEventListener('click', function(e) {
-            if (!this.classList.contains('expanded') && !e.target.classList.contains('expand-btn')) {
-                toggleCycleStack();
-            }
-        });
-        
-        // Click on Shiyu stacked cards to expand
-        document.getElementById('shiyuStack').addEventListener('click', function(e) {
-            if (!this.classList.contains('expanded') && !e.target.classList.contains('expand-btn')) {
-                toggleShiyuStack();
-            }
-        });
-        
-        // Click on Dental stacked cards to expand
-        document.getElementById('dentalStack').addEventListener('click', function(e) {
-            if (!this.classList.contains('expanded') && !e.target.classList.contains('expand-btn')) {
-                toggleDentalStack();
-            }
-        });
-        
-        // Click on Construction stacked cards to expand
-        document.getElementById('constructionStack').addEventListener('click', function(e) {
-            if (!this.classList.contains('expanded') && !e.target.classList.contains('expand-btn')) {
-                toggleConstructionStack();
-            }
-        });
-        
-        // Click on Design stacked cards to expand
-        document.getElementById('designStack').addEventListener('click', function(e) {
-            if (!this.classList.contains('expanded') && !e.target.classList.contains('expand-btn')) {
-                toggleDesignStack();
-            }
-        });
-        
-        // Click on Pixsee stacked cards to expand
-        document.getElementById('pixseeStack').addEventListener('click', function(e) {
-            if (!this.classList.contains('expanded') && !e.target.classList.contains('expand-btn')) {
-                togglePixseeStack();
-            }
-        });
+        // Call the function to attach listeners
+        document.addEventListener('DOMContentLoaded', attachSocialStackListeners);
 
         // Intersection Observer for animations
         const observerOptions = {
@@ -7885,120 +8061,123 @@
         
         // 初始化企劃作品區塊 - 已在setupPlanningCarousel中處理
         
-        // 手機版選單切換
-        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
+        // 手機版選單切換 - 移到DOMContentLoaded內以避免重複
+        function initMobileMenu() {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (mobileMenuToggle && navLinks) {
+                // Remove existing listeners to avoid duplicates
+                const newToggle = mobileMenuToggle.cloneNode(true);
+                mobileMenuToggle.parentNode.replaceChild(newToggle, mobileMenuToggle);
+                
+                newToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    newToggle.classList.toggle('active');
+                });
+                
+                // 點擊連結後關閉選單
+                const navItems = navLinks.querySelectorAll('a');
+                navItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                        newToggle.classList.remove('active');
+                    });
+                });
+                
+                // 點擊選單外部關閉選單
+                document.addEventListener('click', function(event) {
+                    if (!newToggle.contains(event.target) && !navLinks.contains(event.target)) {
+                        navLinks.classList.remove('active');
+                        newToggle.classList.remove('active');
+                    }
+                });
+            }
+        }
         
-        if (mobileMenuToggle && navLinks) {
-            mobileMenuToggle.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-                mobileMenuToggle.classList.toggle('active');
-            });
+        // Initialize mobile menu
+        initMobileMenu();
             
-            // 點擊連結後關閉選單
-            const navItems = navLinks.querySelectorAll('a');
-            
-            // 工作經歷卡片手機版 - 收風琴式
+            // 工作經歷卡片手機版 - 卡片翻轉式
             function initWorkCardsMobile() {
                 if (window.innerWidth <= 767) {
                     const workCards = document.querySelectorAll('.work-card');
+                    
+                    // 移除收風琴邏輯，改為卡片翻轉
                     workCards.forEach(card => {
-                        const cardInner = card.querySelector('.work-card-inner');
-                        const cardFront = card.querySelector('.work-card-front');
-                        const cardBack = card.querySelector('.work-card-back');
+                        // 移除所有收風琴相關的元素
+                        const accordionHeader = card.querySelector('.accordion-header');
+                        const accordionContent = card.querySelector('.accordion-content');
+                        if (accordionHeader) accordionHeader.remove();
+                        if (accordionContent) accordionContent.remove();
                         
-                        if (cardFront && cardBack && !card.querySelector('.accordion-header')) {
-                            // 提取原始資料
-                            const logoImg = cardFront.querySelector('.company-logo img');
-                            const logo = logoImg ? logoImg.src : '';
-                            let companyName = cardFront.querySelector('.company-name')?.textContent || '';
+                        // 恢復原始卡片結構的顯示
+                        const cardFaces = card.querySelectorAll('.work-card-face');
+                        cardFaces.forEach(face => {
+                            face.style.display = 'flex';
+                        });
+                        
+                        // 移除舊的事件監聽器（如果有的話）
+                        const newCard = card.cloneNode(true);
+                        card.parentNode.replaceChild(newCard, card);
+                        
+                        // 添加點擊翻轉功能 - 簡化事件處理
+                        newCard.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
                             
-                            // 縮短公司名稱
-                            const companyNameMap = {
-                                '生洋網路股份有限公司': '生洋網路',
-                                '翰林出版事業股份有限公司': '翰林出版',
-                                '傑克萊兒創意設計有限公司': '傑克萊兒創意',
-                                '戰謀家行銷顧問公司': '戰謀家行銷',
-                                '瑰思行銷有限公司': '瑰思行銷'
-                            };
+                            // 取得當前狀態
+                            const isCurrentlyFlipped = this.classList.contains('is-flipped');
+                            console.log('點擊前狀態:', isCurrentlyFlipped ? '背面' : '正面');
                             
-                            // 使用縮短版本
-                            if (window.innerWidth <= 767) {
-                                companyName = companyNameMap[companyName] || companyName;
+                            // 切換狀態
+                            if (isCurrentlyFlipped) {
+                                this.classList.remove('is-flipped');
+                                console.log('執行: 移除is-flipped類，翻回正面');
+                            } else {
+                                this.classList.add('is-flipped');
+                                console.log('執行: 添加is-flipped類，翻到背面');
                             }
-                            const jobTitleFull = cardFront.querySelector('.job-title')?.textContent || '';
-                            // 分離職位和時間
-                            const [jobTitle, jobTime] = jobTitleFull.split(' | ').map(s => s.trim());
-                            const highlights = cardBack.querySelector('.work-highlights')?.textContent || '';
-                            const description = cardBack.querySelector('.work-description')?.textContent || '';
                             
-                            // 處理標籤分割 - 手機版加上#
-                            const highlightTags = highlights.split(/[｜|]/).map(tag => 
-                                `<span class="highlight-tag">#${tag.trim()}</span>`
-                            ).join(' ');
+                            // 確認新狀態
+                            const newState = this.classList.contains('is-flipped');
+                            console.log('點擊後狀態:', newState ? '背面' : '正面');
                             
-                            // 創建收風琴結構 - 簡潔樣式
-                            cardInner.innerHTML = `
-                                <div class="accordion-header">
-                                    <div class="accordion-main">
-                                        <div class="accordion-logo">
-                                            <img src="${logo}" alt="公司Logo">
-                                        </div>
-                                        <div class="accordion-text-info">
-                                            <div class="accordion-time">📅 ${jobTime || ''}</div>
-                                            <div class="accordion-company">${companyName}</div>
-                                            <div class="accordion-position">${jobTitle || jobTitleFull}</div>
-                                        </div>
-                                    </div>
-                                    <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M6 9l6 6 6-6"/>
-                                    </svg>
-                                </div>
-                                <div class="accordion-content">
-                                    <div class="work-card-highlights">${highlightTags}</div>
-                                    <p class="work-card-description">${description}</p>
-                                </div>
-                            `;
-                            
-                            // 加入點擊展開/收合功能
-                            const header = card.querySelector('.accordion-header');
-                            if (header) {
-                                header.addEventListener('click', () => {
-                                    // 關閉其他展開的卡片
-                                    workCards.forEach(otherCard => {
-                                        if (otherCard !== card) {
-                                            otherCard.classList.remove('expanded');
-                                        }
-                                    });
-                                    // 切換當前卡片
-                                    card.classList.toggle('expanded');
-                                });
+                            // 檢查CSS transform是否生效
+                            const inner = this.querySelector('.work-card-inner');
+                            if (inner) {
+                                const computedStyle = window.getComputedStyle(inner);
+                                console.log('計算後的transform:', computedStyle.transform);
                             }
-                        }
+                        });
                     });
+                    
+                    return; // 不再執行收風琴邏輯
                 }
+                
             }
             
-            // 初始化工作經歷卡片
-            initWorkCardsMobile();
+            // 確保DOM載入完成後初始化
+            document.addEventListener('DOMContentLoaded', function() {
+                initWorkCardsMobile();
+            });
+            
+            // 監聽視窗大小變化，重新初始化
+            let resizeTimer;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    initWorkCardsMobile();
+                }, 250);
+            });
+            
+            // 立即執行一次（如果DOM已載入）
+            if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                initWorkCardsMobile();
+            }
             
             // 在窗口大小改變時重新初始化
             window.addEventListener('resize', initWorkCardsMobile);
-            navItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    navLinks.classList.remove('active');
-                    mobileMenuToggle.classList.remove('active');
-                });
-            });
-            
-            // 點擊選單外部關閉選單
-            document.addEventListener('click', function(event) {
-                if (!mobileMenuToggle.contains(event.target) && !navLinks.contains(event.target)) {
-                    navLinks.classList.remove('active');
-                    mobileMenuToggle.classList.remove('active');
-                }
-            });
-        }
         
         // 展開收合功能
         window.toggleExpand = function(textId) {
@@ -8014,294 +8193,177 @@
         
         // 社群操作手機版標籤切換
         function initSocialMobileTabs() {
-            // 移除窗口寬度檢查，讓功能在所有寬度下都能工作
             const socialTabs = document.querySelectorAll('.social-tab');
             const socialContents = document.querySelectorAll('.social-mobile-content');
+            const viewMoreBtn = document.querySelector('.social-view-more');
             
-            if (socialTabs.length > 0) {
-                socialTabs.forEach(tab => {
-                    tab.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        // 移除所有active狀態
-                        socialTabs.forEach(t => t.classList.remove('active'));
-                        socialContents.forEach(c => c.classList.remove('active'));
-                        
-                        // 添加active狀態到當前選中的標籤和內容
-                        this.classList.add('active');
-                        const category = this.dataset.category;
-                        const targetContent = document.querySelector(`.social-mobile-content[data-content="${category}"]`);
-                        if (targetContent) {
-                            targetContent.classList.add('active');
-                        }
-                    });
-                });
+            if (socialTabs.length === 0 || socialContents.length === 0) {
+                return;
             }
             
-            // 查看更多按鈕 - 獨立處理，不受寬度限制
-            const viewMoreBtn = document.querySelector('.social-view-more');
-            if (viewMoreBtn) {
-                console.log('查看更多按鈕找到了');
-                viewMoreBtn.addEventListener('click', function(e) {
+            // 標籤切換功能
+            socialTabs.forEach((tab) => {
+                tab.addEventListener('click', function(e) {
                     e.preventDefault();
-                    console.log('查看更多按鈕被點擊');
-                    // 滾動到簡報動畫區域
-                    const presentationSection = document.getElementById('presentation');
-                    if (presentationSection) {
-                        console.log('找到簡報區域，開始滾動');
-                        presentationSection.scrollIntoView({ 
-                            behavior: 'smooth',
-                            block: 'start'
+                    
+                    // 如果點擊的是已經激活的標籤，不做任何操作
+                    if (this.classList.contains('active')) {
+                        return;
+                    }
+                    
+                    // 移除所有active狀態
+                    socialTabs.forEach(t => t.classList.remove('active'));
+                    socialContents.forEach(c => {
+                        c.classList.remove('active');
+                        c.style.display = 'none';
+                    });
+                    
+                    // 添加active狀態到當前選中的標籤
+                    this.classList.add('active');
+                    
+                    // 找到對應的內容並顯示
+                    const category = this.dataset.category;
+                    const targetContent = document.querySelector(`.social-mobile-content[data-content="${category}"]`);
+                    
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                        targetContent.style.display = 'grid';
+                        
+                        // 重置該內容的顯示狀態（只顯示前4個）
+                        const items = targetContent.querySelectorAll('.social-mobile-item');
+                        items.forEach((item, index) => {
+                            if (index < 4) {
+                                item.style.setProperty('display', 'block', 'important');
+                            } else {
+                                item.style.setProperty('display', 'none', 'important');
+                            }
                         });
-                    } else {
-                        // 如果沒有找到簡報區域，滾動到聯絡區域
-                        const contactSection = document.getElementById('contact');
-                        if (contactSection) {
-                            console.log('找到聯絡區域，開始滾動');
-                            contactSection.scrollIntoView({ 
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                        } else {
-                            console.log('找不到任何目標區域');
+                        
+                        // 根據分類決定是否顯示查看更多按鈕
+                        if (viewMoreBtn) {
+                            // 只在展覽文案(food)和設計公司(design)顯示按鈕
+                            if (category === 'food' || category === 'design') {
+                                viewMoreBtn.style.display = 'block';
+                                viewMoreBtn.textContent = '查看更多作品';
+                                viewMoreBtn.dataset.expanded = 'false';
+                            } else {
+                                viewMoreBtn.style.display = 'none';
+                            }
                         }
                     }
                 });
-            } else {
-                console.log('找不到查看更多按鈕');
+            });
+            
+            // 查看更多按鈕功能
+            if (viewMoreBtn) {
+                // 初始化按鈕狀態
+                viewMoreBtn.dataset.expanded = 'false';
+                
+                // 綁定點擊事件
+                viewMoreBtn.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    console.log('=== 查看更多按鈕診斷 ===');
+                    console.log('按鈕存在:', viewMoreBtn);
+                    console.log('點擊事件觸發');
+                    
+                    // 找到當前活動的內容區塊
+                    const activeContent = document.querySelector('.social-mobile-content.active');
+                    console.log('活動內容區塊:', activeContent);
+                    
+                    if (!activeContent) {
+                        console.log('錯誤：找不到活動的內容區塊');
+                        alert('找不到活動的內容區塊');
+                        return;
+                    }
+                    
+                    // 獲取所有項目
+                    const allItems = activeContent.querySelectorAll('.social-mobile-item');
+                    console.log('找到項目數量:', allItems.length);
+                    
+                    if (allItems.length === 0) {
+                        console.log('錯誤：當前標籤沒有任何項目');
+                        alert('當前標籤沒有任何項目');
+                        return;
+                    }
+                    
+                    const isExpanded = this.dataset.expanded === 'true';
+                    console.log('當前展開狀態:', isExpanded);
+                    
+                    if (!isExpanded) {
+                        // 展開：顯示所有項目
+                        allItems.forEach((item, index) => {
+                            item.style.setProperty('display', 'block', 'important');
+                            // 為新顯示的項目添加動畫
+                            if (index >= 4) {
+                                item.style.animation = 'fadeIn 0.3s ease';
+                            }
+                        });
+                        this.textContent = '收合作品';
+                        this.dataset.expanded = 'true';
+                    } else {
+                        // 收合：只顯示前4個項目
+                        allItems.forEach((item, index) => {
+                            if (index < 4) {
+                                item.style.setProperty('display', 'block', 'important');
+                            } else {
+                                item.style.setProperty('display', 'none', 'important');
+                            }
+                        });
+                        this.textContent = '查看更多作品';
+                        this.dataset.expanded = 'false';
+                    }
+                };
+            }
+            
+            // 初始化第一個標籤的顯示
+            const firstTab = socialTabs[0];
+            const firstContent = socialContents[0];
+            if (firstTab && firstContent) {
+                firstTab.classList.add('active');
+                firstContent.classList.add('active');
+                firstContent.style.display = 'grid';
+                
+                // 只顯示前4個項目
+                const items = firstContent.querySelectorAll('.social-mobile-item');
+                items.forEach((item, index) => {
+                    if (index < 4) {
+                        item.style.setProperty('display', 'block', 'important');
+                    } else {
+                        item.style.setProperty('display', 'none', 'important');
+                    }
+                });
+                
+                // 初始化查看更多按鈕顯示狀態
+                if (viewMoreBtn) {
+                    const firstCategory = firstTab.dataset.category;
+                    // 只在展覽文案(food)和設計公司(design)顯示按鈕
+                    if (firstCategory === 'food' || firstCategory === 'design') {
+                        viewMoreBtn.style.display = 'block';
+                    } else {
+                        viewMoreBtn.style.display = 'none';
+                    }
+                }
             }
         }
+        
         
         // 在文檔加載完成後初始化
+        function initAllMobileFeatures() {
+            initSocialMobileTabs();
+        }
+        
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
-                console.log('DOMContentLoaded - 初始化社群標籤');
-                initSocialMobileTabs();
-            });
+            document.addEventListener('DOMContentLoaded', initAllMobileFeatures);
         } else {
-            console.log('直接初始化社群標籤');
-            initSocialMobileTabs();
+            // DOM 已經載入，直接執行
+            setTimeout(initAllMobileFeatures, 100);
         }
         
-        // 為了確保按鈕能正常工作，也在 window load 事件後再初始化一次
+        // 為了確保功能正常，在 window load 事件也執行一次
         window.addEventListener('load', function() {
-            console.log('Window loaded - 重新初始化社群標籤');
-            initSocialMobileTabs();
-        });
-        
-        // ====== Enhanced Carousel Touch Support & Keyboard Navigation ======
-        function initCarouselEnhancements() {
-            const carousels = document.querySelectorAll('.carousel-container');
-            
-            carousels.forEach(carousel => {
-                let startX = 0;
-                let currentX = 0;
-                let isDragging = false;
-                
-                const content = carousel.querySelector('#carousel-content, .carousel-wrapper');
-                if (!content) return;
-                
-                // Touch events
-                content.addEventListener('touchstart', (e) => {
-                    startX = e.touches[0].clientX;
-                    isDragging = true;
-                }, { passive: true });
-                
-                content.addEventListener('touchmove', (e) => {
-                    if (!isDragging) return;
-                    currentX = e.touches[0].clientX;
-                }, { passive: true });
-                
-                content.addEventListener('touchend', (e) => {
-                    if (!isDragging) return;
-                    isDragging = false;
-                    
-                    const diff = startX - currentX;
-                    const threshold = 50; // Minimum swipe distance
-                    
-                    if (Math.abs(diff) > threshold) {
-                        const prevBtn = carousel.querySelector('.carousel-prev');
-                        const nextBtn = carousel.querySelector('.carousel-next');
-                        
-                        if (diff > 0 && nextBtn) {
-                            nextBtn.click(); // Swipe left = next
-                        } else if (diff < 0 && prevBtn) {
-                            prevBtn.click(); // Swipe right = prev
-                        }
-                    }
-                });
-                
-                // Keyboard navigation
-                carousel.setAttribute('tabindex', '0');
-                carousel.setAttribute('role', 'region');
-                carousel.setAttribute('aria-label', 'Carousel');
-                
-                carousel.addEventListener('keydown', (e) => {
-                    const prevBtn = carousel.querySelector('.carousel-prev');
-                    const nextBtn = carousel.querySelector('.carousel-next');
-                    
-                    switch(e.key) {
-                        case 'ArrowLeft':
-                            if (prevBtn) prevBtn.click();
-                            e.preventDefault();
-                            break;
-                        case 'ArrowRight':
-                            if (nextBtn) nextBtn.click();
-                            e.preventDefault();
-                            break;
-                    }
-                });
-                
-                // Add visual feedback dots
-                const items = carousel.querySelectorAll('.carousel-item, .copy-content');
-                if (items.length > 1) {
-                    const dotsContainer = document.createElement('div');
-                    dotsContainer.className = 'carousel-dots';
-                    dotsContainer.style.cssText = 'display: flex; justify-content: center; gap: 8px; margin-top: 16px;';
-                    
-                    items.forEach((item, index) => {
-                        const dot = document.createElement('button');
-                        dot.className = 'carousel-dot';
-                        dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
-                        dot.style.cssText = 'width: 8px; height: 8px; border-radius: 50%; border: none; background: #ccc; cursor: pointer; transition: all 0.3s;';
-                        if (index === 0) dot.style.background = '#667eea';
-                        
-                        dot.addEventListener('click', () => {
-                            // Navigate to specific slide
-                            if (window.currentCarouselIndex !== undefined) {
-                                window.currentCarouselIndex = index;
-                                updateCarouselContent();
-                                updateDots();
-                            }
-                        });
-                        
-                        dotsContainer.appendChild(dot);
-                    });
-                    
-                    // Insert dots after carousel content
-                    if (content.parentNode) {
-                        content.parentNode.insertBefore(dotsContainer, content.nextSibling);
-                    }
-                }
-            });
-        }
-        
-        // Update dots on carousel change
-        function updateCarouselDots(carousel, currentIndex) {
-            const dots = carousel.querySelectorAll('.carousel-dot');
-            dots.forEach((dot, index) => {
-                dot.style.background = index === currentIndex ? '#667eea' : '#ccc';
-            });
-        }
-        
-        // ====== Lazy Loading Implementation ======
-        function initLazyLoading() {
-            const images = document.querySelectorAll('img[src]');
-            
-            // Add lazy loading attributes to images
-            images.forEach(img => {
-                // Skip logo and critical images
-                if (img.closest('nav') || img.closest('.hero')) return;
-                
-                // Store original src
-                if (!img.dataset.src) {
-                    img.dataset.src = img.src;
-                }
-                
-                // Set loading attribute
-                img.loading = 'lazy';
-                
-                // Add aspect ratio to prevent layout shift
-                if (!img.style.aspectRatio && !img.hasAttribute('width') && !img.hasAttribute('height')) {
-                    // Default aspect ratio for portfolio images
-                    if (img.closest('.portfolio-item, .project-card, .work-card')) {
-                        img.style.aspectRatio = '16/9';
-                    }
-                }
-                
-                // Add placeholder background
-                if (!img.complete) {
-                    img.style.background = '#f0f0f0';
-                }
-            });
-            
-            // Use Intersection Observer for browsers that don't support native lazy loading
-            if ('IntersectionObserver' in window) {
-                const imageObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            if (img.dataset.src && img.dataset.src !== img.src) {
-                                img.src = img.dataset.src;
-                                img.onload = () => {
-                                    img.style.background = 'none';
-                                };
-                                imageObserver.unobserve(img);
-                            }
-                        }
-                    });
-                }, {
-                    rootMargin: '50px'
-                });
-                
-                images.forEach(img => {
-                    if (!img.loading || img.loading !== 'lazy') {
-                        imageObserver.observe(img);
-                    }
-                });
-            }
-        }
-        
-        // ====== Performance Optimization for Mobile ======
-        function optimizeForMobile() {
-            // Reduce animation complexity on mobile
-            if (window.innerWidth <= 768) {
-                // Disable complex animations
-                const style = document.createElement('style');
-                style.textContent = `
-                    @media (max-width: 768px) {
-                        * {
-                            animation-duration: 0.3s !important;
-                            transition-duration: 0.3s !important;
-                        }
-                        .hero-shapes,
-                        .hero-particles {
-                            animation: none !important;
-                        }
-                    }
-                `;
-                document.head.appendChild(style);
-                
-                // Reduce backdrop filter on mobile for better performance
-                document.querySelectorAll('[style*="backdrop-filter"]').forEach(el => {
-                    if (window.matchMedia('(max-width: 768px)').matches) {
-                        el.style.backdropFilter = 'blur(5px)';
-                    }
-                });
-            }
-        }
-        
-        // ====== Initialize all enhancements ======
-        document.addEventListener('DOMContentLoaded', () => {
-            initCarouselEnhancements();
-            initLazyLoading();
-            optimizeForMobile();
-            
-            // Prevent iOS bounce effect
-            document.body.addEventListener('touchmove', (e) => {
-                if (e.target.closest('.carousel-container, .social-triple-container')) {
-                    // Allow scrolling in carousels
-                    return;
-                }
-            }, { passive: true });
-        });
-        
-        // Re-initialize on window resize (debounced)
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                optimizeForMobile();
-            }, 250);
+            setTimeout(initAllMobileFeatures, 200);
         });
     </script>
 </body>
