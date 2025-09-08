@@ -1,9 +1,43 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>王嘉涓作品集 - Portfolio</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="王嘉涓的專業作品集，展示品牌策略、文案撰寫、社群操作、電商企劃等多元創意作品">
+    <meta name="keywords" content="王嘉涓,作品集,品牌策略,文案撰寫,社群操作,電商企劃,Portfolio">
+    <meta name="author" content="王嘉涓">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourwebsite.com/">
+    <meta property="og:title" content="王嘉涓作品集 - Portfolio">
+    <meta property="og:description" content="專業品牌策略與創意企劃作品集，涵蓋文案撰寫、社群操作、電商企劃等領域">
+    <meta property="og:image" content="giraffe-logo.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="王嘉涓 Portfolio">
+    <meta property="og:locale" content="zh_TW">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourwebsite.com/">
+    <meta property="twitter:title" content="王嘉涓作品集 - Portfolio">
+    <meta property="twitter:description" content="專業品牌策略與創意企劃作品集">
+    <meta property="twitter:image" content="giraffe-logo.svg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="giraffe-logo.svg">
+    <link rel="apple-touch-icon" href="giraffe-logo.svg">
+    
+    <!-- 搜尋引擎爬蟲設定 -->
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <link rel="canonical" href="https://yourwebsite.com/">
+    
     <style>
         /* Modern Design System Variables */
         :root {
@@ -290,7 +324,7 @@
             justify-content: space-between;
             align-items: center;
         }
- 
+
         .logo {
             display: flex;
             align-items: center;
@@ -5246,9 +5280,10 @@
             
             .category-tab {
                 flex: 0 0 auto !important;
-                font-size: 0.75rem !important;
-                padding: 0.5rem 0.6rem !important;
+                font-size: 1rem !important;
+                padding: 0.7rem 1.2rem !important;
                 white-space: nowrap !important;
+                font-weight: 600 !important;
             }
             
             /* 輪播容器調整 */
@@ -5999,19 +6034,25 @@
             .social-mobile-tabs {
                 display: flex !important;
                 gap: 0.5rem !important;
-                overflow-x: hidden !important;
-                padding: 0.5rem 0 !important;
+                overflow-x: auto !important;
+                overflow-y: hidden !important;
+                padding: 0.5rem 1rem !important;
                 margin-bottom: 1rem !important;
                 -webkit-overflow-scrolling: touch !important;
+                scroll-behavior: smooth !important;
+                /* 確保容器可以滑動 */
+                width: 100% !important;
+                box-sizing: border-box !important;
             }
             
+            /* 隱藏滾動條但保留滑動功能 */
             .social-mobile-tabs::-webkit-scrollbar {
-                height: 4px !important;
+                display: none !important;
             }
             
-            .social-mobile-tabs::-webkit-scrollbar-thumb {
-                background: rgba(59, 130, 246, 0.3) !important;
-                border-radius: 2px !important;
+            .social-mobile-tabs {
+                scrollbar-width: none !important; /* Firefox */
+                -ms-overflow-style: none !important; /* IE/Edge */
             }
             
             .social-tab {
@@ -6023,7 +6064,27 @@
                 cursor: pointer !important;
                 transition: all 0.3s ease !important;
                 font-size: 0.9rem !important;
+                flex: 0 0 auto !important;
                 flex-shrink: 0 !important;
+                display: inline-block !important;
+            }
+            
+            /* 滑動提示（可選） */
+            .social-mobile-tabs::after {
+                content: '' !important;
+                position: absolute !important;
+                right: 0 !important;
+                top: 0 !important;
+                bottom: 0 !important;
+                width: 30px !important;
+                background: linear-gradient(to right, transparent, rgba(255,255,255,0.8)) !important;
+                pointer-events: none !important;
+                opacity: 0 !important;
+                transition: opacity 0.3s !important;
+            }
+            
+            .social-mobile-tabs.has-scroll::after {
+                opacity: 1 !important;
             }
             
             .social-tab.active {
@@ -6341,6 +6402,171 @@
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             user-select: none;
+        }
+        
+        /* 額外的Safari修復 */
+        /* 修復Safari中的position fixed問題 */
+        @supports (-webkit-appearance: none) {
+            .nav-container {
+                position: -webkit-sticky !important;
+                position: sticky !important;
+                top: 0 !important;
+                z-index: 9999 !important;
+                transform: translateZ(0) !important;
+                -webkit-transform: translateZ(0) !important;
+            }
+            
+            /* 修復Safari中的3D transform */
+            .work-card {
+                -webkit-perspective: 1000px !important;
+                perspective: 1000px !important;
+            }
+            
+            .work-card-inner {
+                -webkit-transform-style: preserve-3d !important;
+                transform-style: preserve-3d !important;
+                -webkit-transition: transform 0.6s !important;
+                transition: transform 0.6s !important;
+            }
+            
+            .work-card-face {
+                -webkit-backface-visibility: hidden !important;
+                backface-visibility: hidden !important;
+                position: absolute !important;
+                width: 100% !important;
+                height: 100% !important;
+            }
+            
+            .work-card-back {
+                -webkit-transform: rotateY(180deg) !important;
+                transform: rotateY(180deg) !important;
+            }
+            
+            /* 修復Safari中的overflow滾動 */
+            body {
+                -webkit-overflow-scrolling: touch !important;
+            }
+            
+            .work-cards-grid,
+            .festival-content-redesign,
+            .line-gift-wrapper,
+            .social-mobile-tabs,
+            .spring-main-scroll {
+                -webkit-overflow-scrolling: touch !important;
+                overflow-scrolling: touch !important;
+                transform: translateZ(0) !important;
+                -webkit-transform: translateZ(0) !important;
+            }
+            
+            /* 修復Safari中的flexbox */
+            .work-cards-grid,
+            .category-tabs,
+            .about-content {
+                display: -webkit-box !important;
+                display: -webkit-flex !important;
+                display: flex !important;
+            }
+            
+            /* 修復Safari中的高度問題 */
+            .hero {
+                min-height: 100vh !important;
+                min-height: -webkit-fill-available !important;
+            }
+            
+            /* 修復Safari中的文字渲染 */
+            body {
+                -webkit-font-smoothing: antialiased !important;
+                -moz-osx-font-smoothing: grayscale !important;
+            }
+            
+            /* 修復Safari中的動畫 */
+            * {
+                -webkit-animation-fill-mode: both !important;
+                animation-fill-mode: both !important;
+            }
+        }
+        
+        /* iOS Safari專用額外修復 */
+        @supports (-webkit-touch-callout: none) {
+            /* 防止iOS橡皮筋效果 */
+            html, body {
+                position: relative !important;
+                height: 100% !important;
+                overflow-x: hidden !important;
+                -webkit-overflow-scrolling: touch !important;
+            }
+            
+            /* 修復iOS上的fixed定位 */
+            .nav-container {
+                position: -webkit-sticky !important;
+                position: sticky !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                z-index: 9999 !important;
+            }
+            
+            /* 修復iOS Safari上的輸入框 */
+            input, textarea, select, button {
+                -webkit-appearance: none !important;
+                -moz-appearance: none !important;
+                appearance: none !important;
+                font-size: 16px !important;
+                border-radius: 0 !important;
+            }
+            
+            /* 修復iOS上的點擊延遲 */
+            * {
+                touch-action: manipulation !important;
+            }
+            
+            /* 修復iOS上的滾動容器 */
+            .work-cards-grid,
+            .carousel-container,
+            .festival-content-redesign,
+            .line-gift-wrapper {
+                -webkit-overflow-scrolling: touch !important;
+                overflow-scrolling: touch !important;
+                will-change: transform !important;
+            }
+            
+            /* 修復iOS上的3D變換 */
+            .work-card-inner {
+                -webkit-transform: translateZ(0) rotateY(0deg) !important;
+                transform: translateZ(0) rotateY(0deg) !important;
+            }
+            
+            .work-card.is-flipped .work-card-inner,
+            .work-card-inner.is-flipped {
+                -webkit-transform: translateZ(0) rotateY(180deg) !important;
+                transform: translateZ(0) rotateY(180deg) !important;
+            }
+        }
+        
+        /* Safari桌面版專用修復 */
+        @media not all and (pointer: coarse) {
+            @supports (-webkit-appearance: none) {
+                /* 修復桌面Safari的hover效果 */
+                .work-card:hover .work-card-inner {
+                    -webkit-transform: rotateY(180deg) !important;
+                    transform: rotateY(180deg) !important;
+                }
+                
+                /* 修復桌面Safari的滾動 */
+                ::-webkit-scrollbar {
+                    width: 8px !important;
+                    height: 8px !important;
+                }
+                
+                ::-webkit-scrollbar-track {
+                    background: rgba(0, 0, 0, 0.05) !important;
+                }
+                
+                ::-webkit-scrollbar-thumb {
+                    background: rgba(0, 0, 0, 0.2) !important;
+                    border-radius: 4px !important;
+                }
+            }
         }
     </style>
     
