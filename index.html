@@ -4381,7 +4381,7 @@
             /* LINE禮物滾動容器 */
             #ecommerce-works .line-gift-block .line-gift-wrapper {
                 display: flex !important;
-                overflow-x: hidden !important;
+                overflow-x: auto !important;
                 overflow-y: hidden !important;
                 -webkit-overflow-scrolling: touch !important;
                 scroll-behavior: smooth !important;
@@ -4599,12 +4599,12 @@
             /* 工作經歷 - 手機版左右滑動卡片 */
             @media (max-width: 767px) {
                 .work-experience {
-                    overflow-x: hidden !important;
+                    overflow-x: visible !important;
                 }
                 
                 .work-grid {
                     display: flex !important;
-                    overflow-x: hidden !important;
+                    overflow-x: auto !important;
                     overflow-y: hidden !important;
                     scroll-behavior: smooth !important;
                     -webkit-overflow-scrolling: touch !important;
@@ -4634,7 +4634,8 @@
                 /* 手機版卡片翻轉式 - 支援橫向滑動 */
                 #experience .work-cards-grid {
                     display: flex !important;
-                    overflow-x: hidden !important;
+                    overflow-x: auto !important;
+                    overflow-y: hidden !important;
                     scroll-snap-type: x mandatory !important;
                     -webkit-overflow-scrolling: touch !important;
                     gap: 1rem !important;
@@ -5583,7 +5584,7 @@
                 flex-direction: row !important;
                 gap: 1rem !important;
                 flex-wrap: nowrap !important;
-                overflow-x: hidden !important;
+                overflow-x: auto !important;
                 overflow-y: hidden !important;
                 -webkit-overflow-scrolling: touch !important;
                 scroll-behavior: smooth !important;
@@ -5641,6 +5642,32 @@
                 -webkit-overflow-scrolling: touch !important;
                 border-radius: 15px !important;
                 margin-bottom: 1rem !important;
+                position: relative !important;
+            }
+            
+            /* 滑動提示 - 互動遊戲 */
+            .spring-main-scroll::after {
+                content: '↕ 上下滑動查看完整內容' !important;
+                position: absolute !important;
+                bottom: 10px !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                background: rgba(0, 0, 0, 0.8) !important;
+                color: white !important;
+                padding: 5px 15px !important;
+                border-radius: 20px !important;
+                font-size: 0.85rem !important;
+                font-weight: 500 !important;
+                pointer-events: none !important;
+                z-index: 10 !important;
+                backdrop-filter: blur(10px) !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                animation: fadeInOut 3s ease-in-out infinite !important;
+            }
+            
+            @keyframes fadeInOut {
+                0%, 100% { opacity: 0.7; }
+                50% { opacity: 1; }
             }
             
             .spring-main-scroll img {
@@ -5817,25 +5844,61 @@
             
             /* 修復手機版關於我區域超出版面 */
             .about-section {
-                padding: 2rem 0 !important;
+                padding: 2rem 1rem !important;
                 overflow-x: hidden !important;
             }
             
             .about-container {
                 width: 100% !important;
                 max-width: 100% !important;
-                padding: 0 15px !important;
+                padding: 0 1rem !important;
                 box-sizing: border-box !important;
             }
             
             .about-content {
                 width: 100% !important;
                 padding: 0 !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
             }
             
             .about-text {
                 width: 100% !important;
                 padding: 0 !important;
+                text-align: center !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+            }
+            
+            /* 個人簡介專業技能置中 */
+            .professional-skills {
+                width: 100% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+            }
+            
+            /* 統計數據置中 */
+            .about-stats {
+                width: 100% !important;
+                display: grid !important;
+                justify-items: center !important;
+                text-align: center !important;
+            }
+            
+            /* 專業工具區塊置中 */
+            .tools-section {
+                width: 100% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+            }
+            
+            .tools-grid {
+                justify-content: center !important;
             }
             
             /* 亮點作品手機版 - 縮小圖片、放大字體、加入展開功能 */
@@ -6158,6 +6221,126 @@
                 overflow: hidden !important;
                 text-overflow: ellipsis !important;
             }
+        }
+        
+        /* Safari 相容性修復 */
+        @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+            .nav-container,
+            .category-tab,
+            .project-card,
+            .hover-hint,
+            .skill-card,
+            .gallery-projects .project-card {
+                -webkit-backdrop-filter: blur(10px);
+                backdrop-filter: blur(10px);
+            }
+        }
+        
+        /* Safari 專用修復 */
+        @media not all and (min-resolution:.001dpcm) {
+            @supports (-webkit-appearance:none) {
+                /* 修復Safari中的100vh問題 */
+                .hero {
+                    min-height: -webkit-fill-available;
+                }
+                
+                /* 修復Safari中的flexbox問題 */
+                .about-content,
+                .gallery-projects,
+                .work-cards-grid {
+                    display: -webkit-flex;
+                    display: flex;
+                }
+                
+                /* 修復Safari中的transform-style */
+                .work-card-inner {
+                    -webkit-transform-style: preserve-3d;
+                    transform-style: preserve-3d;
+                }
+                
+                /* 修復Safari中的backface-visibility */
+                .work-card-face {
+                    -webkit-backface-visibility: hidden;
+                    backface-visibility: hidden;
+                }
+                
+                /* 修復Safari滾動問題 */
+                .festival-content-redesign,
+                .line-gift-wrapper,
+                .work-cards-grid {
+                    -webkit-overflow-scrolling: touch !important;
+                }
+            }
+        }
+        
+        /* iOS Safari 專用修復 */
+        @supports (-webkit-touch-callout: none) {
+            /* 修復iOS上的100vh問題 */
+            .hero {
+                min-height: 100vh;
+                min-height: -webkit-fill-available;
+            }
+            
+            /* 修復iOS上的輸入框聚焦問題 */
+            input, textarea, select {
+                font-size: 16px !important;
+            }
+            
+            /* 修復iOS上的觸控滾動 */
+            body {
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* 修復iOS上的滾動容器 */
+            .festival-content-redesign,
+            .line-gift-wrapper,
+            .work-cards-grid,
+            .carousel-container {
+                -webkit-overflow-scrolling: touch !important;
+                overflow-scrolling: touch !important;
+            }
+        }
+        
+        /* 修復Safari中的文字渐变 */
+        .gallery-title,
+        .section-title,
+        .hero h1 {
+            background-clip: text !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+        }
+        
+        /* 修復Safari中的動畫 */
+        @-webkit-keyframes pulse {
+            0%, 100% { -webkit-transform: scale(1); opacity: 0.5; }
+            50% { -webkit-transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        @-webkit-keyframes float {
+            0%, 100% { -webkit-transform: translateY(0px); }
+            50% { -webkit-transform: translateY(-20px); }
+        }
+        
+        /* 修復Safari中的scroll-snap */
+        .work-cards-grid {
+            scroll-snap-type: x mandatory;
+            -webkit-scroll-snap-type: x mandatory;
+        }
+        
+        .work-card {
+            scroll-snap-align: center;
+            -webkit-scroll-snap-align: center;
+        }
+        
+        /* 修復Safari觸控事件 */
+        .work-card,
+        .carousel-nav,
+        .category-tab,
+        .skill-circle {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
         }
     </style>
     
