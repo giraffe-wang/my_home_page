@@ -10,6 +10,8 @@
             /* Brand Colors - Modern Blue Gradient */
             --primary: #1E40AF;
             --primary-dark: #1E3A8A;
+            --primary-color: #1E40AF; /* 補充缺少的變數 */
+            --bg-primary: #ffffff; /* 補充缺少的變數 */
             --primary-light: #3B82F6;
             --primary-gradient: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
             
@@ -680,6 +682,7 @@
             font-weight: 500;
             position: relative;
             padding-bottom: 1rem;
+            z-index: 1;
         }
 
         .section-label::after {
@@ -921,8 +924,8 @@
         
         /* Professional Skills Hover Effects */
         .skill-circle:hover {
-            transform: translateY(-8px) !important;
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.35) !important;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.35);
         }
         
         /* 工具技能樣式 */
@@ -1155,17 +1158,18 @@
             text-align: center;
             transition: transform 0.6s;
             transform-style: preserve-3d;
+            will-change: transform;
         }
 
         /* 桌面版hover效果 */
-        @media (min-width: 768px) {
+        @media (min-width: 769px) {
             .work-card:hover .work-card-inner {
                 transform: rotateY(180deg);
             }
         }
         
         /* 桌面版翻轉狀態 */
-        @media (min-width: 768px) {
+        @media (min-width: 769px) {
             .work-card.is-flipped .work-card-inner {
                 transform: rotateY(180deg) !important;
             }
@@ -1296,7 +1300,7 @@
             justify-content: center;
             gap: 1rem;
             margin-bottom: 3rem;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
         }
 
         .category-tab {
@@ -1877,8 +1881,9 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
             display: flex;
             align-items: center;
-            justify-content: flex-end;
+            justify-content: center; /* 改為置中對齊 */
             padding: 10px;
+            min-height: 200px; /* 確保有最小高度 */
             height: auto;
         }
         
@@ -1889,7 +1894,7 @@
             height: 100%;
             flex: 1;
             min-width: 0;
-            max-width: 50%;
+            /* max-width: 50%; 移除寬度限制 */
         }
         
         .preview-main {
@@ -1975,7 +1980,7 @@
         }
         
         .preview-side img {
-            width: 100%;
+            /* width: 100%; 移除固定寬度，讓內聯樣式控制 */
             height: auto;
             max-height: 100%;
             object-fit: contain;
@@ -1986,16 +1991,33 @@
         .dual-preview .image-label {
             position: absolute;
             bottom: 15px;
-            left: 15px;
+            left: 10px;
             background: linear-gradient(135deg, rgba(255, 107, 107, 0.9) 0%, rgba(255, 71, 87, 0.9) 100%);
             color: white;
-            padding: 6px 18px;
+            padding: 3px 2px;
             border-radius: var(--radius-lg);
             font-size: 0.85rem;
             font-weight: 700;
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            letter-spacing: 0.5px;
+            letter-spacing: 0;
+        }
+        
+        /* 專門為抽籤頁標籤設計的樣式 */
+        .lottery-label {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.95) 0%, rgba(255, 71, 87, 0.95) 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 18px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+            letter-spacing: 0.3px;
+            z-index: 10;
         }
         
         .preview-main .hover-hint {
@@ -2115,6 +2137,49 @@
                 border-radius: 25px;
                 padding: 20px;
                 border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            /* 確保桌面版雙欄結構正確顯示 */
+            .spring-campaign-block .dual-preview {
+                display: flex !important;
+                gap: 2rem !important;
+                height: 450px !important;
+                width: 100% !important;
+            }
+            
+            .spring-campaign-block .preview-main {
+                flex: 1 !important;
+                display: flex !important;
+                position: relative !important;
+                height: 450px !important;
+            }
+            
+            .spring-campaign-block .preview-side-wrapper {
+                flex: 1 !important;
+                display: flex !important;
+                flex-direction: column !important;
+                height: 450px !important;
+                max-width: none !important;
+            }
+            
+            .spring-campaign-block .preview-side {
+                display: flex !important;
+                flex: 1 !important;
+                min-height: 200px !important;
+                position: relative !important;
+            }
+            
+            .spring-campaign-block .campaign-header-side {
+                display: flex !important;
+                flex-direction: column !important;
+            }
+            
+            .spring-campaign-block .desktop-only {
+                display: flex !important;
+            }
+            
+            .spring-campaign-block .mobile-only {
+                display: none !important;
             }
         }
         
@@ -2319,6 +2384,16 @@
                 grid-template-columns: repeat(3, 1fr);
                 gap: 1rem;
                 margin-bottom: 1rem;
+                align-items: center; /* 垂直置中對齊 */
+            }
+            
+            /* LINE禮物標題區塊垂直置中 */
+            .line-gift-block .campaign-header-side {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: center !important;
+                align-items: center !important;
+                height: 100% !important;
             }
             
             .line-images-grid {
@@ -3377,6 +3452,9 @@
             
             .section-label {
                 font-size: 0.8rem;
+                margin-bottom: 0.8rem !important;
+                display: block !important;
+                text-align: center !important;
             }
             
             .work-card {
@@ -3460,6 +3538,27 @@
         
         /* Mobile professional skills optimization */
         @media (max-width: 767px) {
+            /* 修正手機版標題重疊問題 */
+            .section-header {
+                padding: 2rem 0 !important;
+                position: relative !important;
+                overflow: visible !important;
+            }
+            
+            .section-label {
+                position: relative !important;
+                margin-bottom: 1rem !important;
+                line-height: 1.2 !important;
+                z-index: 2 !important;
+            }
+            
+            .section-title {
+                position: relative !important;
+                margin-top: 0 !important;
+                line-height: 1.3 !important;
+                z-index: 1 !important;
+            }
+            
             /* Professional skills responsive layout */
             .professional-skills {
                 padding: 0 20px;
@@ -3856,12 +3955,15 @@
             .section-title {
                 font-size: 1.5rem;
                 line-height: 1.2;
-                padding: 0 10px;
+                padding: 15px 20px;
             }
             
             .section-label {
                 font-size: 0.7rem;
-                padding: 0 10px;
+                padding: 10px 20px;
+                margin-bottom: 0.5rem !important;
+                display: block !important;
+                text-align: center !important;
             }
             
             /* Work cards responsive */
@@ -4227,7 +4329,7 @@
                 position: relative !important;
             }
             
-            /* 隱藏原本的雙欄結構 */
+            /* 手機版調整雙欄結構 */
             .spring-campaign-block .preview-main,
             .spring-campaign-block .preview-side-wrapper {
                 display: block !important;
@@ -4238,9 +4340,9 @@
                 display: none !important;
             }
             
-            .spring-campaign-block .preview-side {
+            /* .spring-campaign-block .preview-side {
                 display: none !important;
-            }
+            } */
             
             .spring-campaign-block .full-content {
                 display: none !important;
@@ -4279,7 +4381,7 @@
             /* LINE禮物滾動容器 */
             #ecommerce-works .line-gift-block .line-gift-wrapper {
                 display: flex !important;
-                overflow-x: auto !important;
+                overflow-x: hidden !important;
                 overflow-y: hidden !important;
                 -webkit-overflow-scrolling: touch !important;
                 scroll-behavior: smooth !important;
@@ -4502,7 +4604,7 @@
                 
                 .work-grid {
                     display: flex !important;
-                    overflow-x: auto !important;
+                    overflow-x: hidden !important;
                     overflow-y: hidden !important;
                     scroll-behavior: smooth !important;
                     -webkit-overflow-scrolling: touch !important;
@@ -4532,7 +4634,7 @@
                 /* 手機版卡片翻轉式 - 支援橫向滑動 */
                 #experience .work-cards-grid {
                     display: flex !important;
-                    overflow-x: auto !important;
+                    overflow-x: hidden !important;
                     scroll-snap-type: x mandatory !important;
                     -webkit-overflow-scrolling: touch !important;
                     gap: 1rem !important;
@@ -4699,7 +4801,6 @@
                 
                 .work-card-highlights {
                     display: flex !important;
-                    flex-wrap: wrap !important;
                     justify-content: center !important;
                     align-items: center !important;
                     gap: 0.3rem !important;
@@ -4796,16 +4897,15 @@
             
             .category-tabs {
                 flex-wrap: nowrap;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
+                overflow-x: hidden;
                 gap: 0.5rem;
                 padding: 0 1rem;
             }
             
             .category-tab {
                 flex-shrink: 0;
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
+                padding: 0.5rem 0.6rem;
+                font-size: 0.75rem;
             }
             
             .card-tags {
@@ -4895,7 +4995,7 @@
             /* LINE禮物標題 - 同限定活動 */
             /* 刪除重複的line-gift-block::before規則 - 已在上方定義 */
             
-            /* 專業工具運用 - 手機版第一行三個，第二行兩個置中，只顯示圖片 */
+            /* 專業工具運用 - 手機版每行三個，只顯示圖片 */
             .tools-grid {
                 display: grid !important;
                 grid-template-columns: repeat(3, 1fr) !important;
@@ -4903,19 +5003,6 @@
                 padding: 0 1rem !important;
                 justify-items: center !important;
                 align-items: center !important;
-            }
-            
-            /* 第二行兩個項目置中 */
-            .tools-grid .tool-item:nth-child(4) {
-                grid-column: 1 / 2 !important;
-                justify-self: end !important;
-                margin-right: 0.5rem !important;
-            }
-            
-            .tools-grid .tool-item:nth-child(5) {
-                grid-column: 2 / 3 !important;
-                justify-self: start !important;
-                margin-left: 0.5rem !important;
             }
             
             /* 工具項目樣式 - 只顯示圖片 */
@@ -4998,7 +5085,7 @@
             .spring-items {
                 width: 100% !important;
                 display: flex !important;
-                overflow-x: auto !important;
+                overflow-x: hidden !important;
                 gap: 15px !important;
                 padding: 10px !important;
                 scroll-behavior: smooth;
@@ -5151,16 +5238,15 @@
             .category-tabs {
                 display: flex !important;
                 justify-content: center !important;
-                gap: 0.5rem !important;
-                padding: 0 10px !important;
-                overflow-x: auto !important;
-                -webkit-overflow-scrolling: touch !important;
+                gap: 0.3rem !important;
+                padding: 0 5px !important;
+                overflow-x: hidden !important;
             }
             
             .category-tab {
                 flex: 0 0 auto !important;
-                font-size: 0.85rem !important;
-                padding: 0.5rem 1rem !important;
+                font-size: 0.75rem !important;
+                padding: 0.5rem 0.6rem !important;
                 white-space: nowrap !important;
             }
             
@@ -5243,7 +5329,7 @@
             .copy-tags {
                 display: flex !important;
                 flex-wrap: nowrap !important;
-                overflow-x: auto !important;
+                overflow-x: hidden !important;
                 gap: 0.3rem !important;
                 margin-bottom: 0.5rem !important;
                 -webkit-overflow-scrolling: touch !important;
@@ -5497,7 +5583,7 @@
                 flex-direction: row !important;
                 gap: 1rem !important;
                 flex-wrap: nowrap !important;
-                overflow-x: auto !important;
+                overflow-x: hidden !important;
                 overflow-y: hidden !important;
                 -webkit-overflow-scrolling: touch !important;
                 scroll-behavior: smooth !important;
@@ -5797,7 +5883,6 @@
                 
                 .copy-tags {
                     display: flex !important;
-                    flex-wrap: wrap !important;
                     gap: 0.5rem !important;
                     margin-bottom: 1rem !important;
                     position: relative !important;
@@ -5851,7 +5936,7 @@
             .social-mobile-tabs {
                 display: flex !important;
                 gap: 0.5rem !important;
-                overflow-x: auto !important;
+                overflow-x: hidden !important;
                 padding: 0.5rem 0 !important;
                 margin-bottom: 1rem !important;
                 -webkit-overflow-scrolling: touch !important;
@@ -5977,7 +6062,7 @@
             }
             
             #social-media .social-carousel-track {
-                overflow-x: auto !important;
+                overflow-x: hidden !important;
                 overflow-y: visible !important;
                 -webkit-overflow-scrolling: touch !important;
                 scroll-behavior: smooth !important;
@@ -6075,6 +6160,16 @@
             }
         }
     </style>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B9KX2MD8Q8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-B9KX2MD8Q8');
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -6192,7 +6287,7 @@
                         </div>
                         <div class="stat-item">
                             <div class="stat-number" data-target="5">0</div>
-                            <div class="stat-label">養過的狗</div>
+                            <div class="stat-label">住過我家的狗</div>
                             <div class="stat-bar">
                                 <div class="stat-fill" style="width: 0%;" data-width="88%"></div>
                             </div>
@@ -6204,24 +6299,28 @@
                         <h3 style="color: var(--gray-700); margin-bottom: 1.5rem; font-size: 1.3rem; font-weight: 600; text-align: center;">專業工具運用</h3>
                         <div class="tools-grid">
                             <div class="tool-item">
-                                <img src="軟體/office.png" alt="Office" class="tool-logo">
+                                <img src="軟體/office.png" alt="Office" class="tool-logo" loading="lazy">
                                 <span class="tool-name">Office系統</span>
                             </div>
                             <div class="tool-item">
-                                <img src="軟體/Google Analytics.png" alt="Google Analytics" class="tool-logo">
+                                <img src="軟體/Google Analytics.png" alt="Google Analytics" class="tool-logo" loading="lazy">
                                 <span class="tool-name">Google Analytics</span>
                             </div>
                             <div class="tool-item">
-                                <img src="軟體/Canva.jpg" alt="Canva" class="tool-logo">
+                                <img src="軟體/Canva.jpg" alt="Canva" class="tool-logo" loading="lazy">
                                 <span class="tool-name">Canva</span>
                             </div>
                             <div class="tool-item">
-                                <img src="軟體/Adobe Premiere Pro.png" alt="Adobe Premiere Pro" class="tool-logo">
+                                <img src="軟體/Adobe Premiere Pro.png" alt="Adobe Premiere Pro" class="tool-logo" loading="lazy">
                                 <span class="tool-name">Adobe Premiere Pro</span>
                             </div>
                             <div class="tool-item">
-                                <img src="軟體/OpView.jpg" alt="OpView" class="tool-logo">
+                                <img src="軟體/OpView.jpg" alt="OpView" class="tool-logo" loading="lazy">
                                 <span class="tool-name">OpView</span>
+                            </div>
+                            <div class="tool-item">
+                                <img src="軟體/Cursor.jpg" alt="Cursor" class="tool-logo" loading="lazy">
+                                <span class="tool-name">Cursor</span>
                             </div>
                         </div>
                     </div>
@@ -6948,9 +7047,9 @@
                                         <span class="image-label">主活動Banner</span>
                                         <div class="hover-hint">滑入查看完整活動頁面 ↓</div>
                                     </div>
-                                    <div class="preview-side-wrapper" style="overflow: visible; display: flex; flex-direction: column; height: 450px; align-items: flex-end;">
+                                    <div class="preview-side-wrapper" style="overflow: visible; display: flex; flex-direction: column; height: 450px; align-items: stretch;">
                                         <div class="campaign-header-side" style="padding: 1rem; min-width: 200px; text-align: right;">
-                                            <h3 class="campaign-title-side" style="color: white !important; -webkit-text-fill-color: white !important; white-space: nowrap; margin-bottom: 1rem;">白蘭氏新春活動企劃</h3>
+                                            <h3 class="campaign-title-side" style="color: white !important; -webkit-text-fill-color: white !important; white-space: nowrap; margin-bottom: 1rem;">互動遊戲</h3>
                                             <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; font-size: 0.95rem; white-space: nowrap;">好命財攻略主題活動頁面</p>
                                             <div class="campaign-tags-side" style="white-space: nowrap; justify-content: flex-end; display: flex; gap: 0.5rem;">
                                                 <span class="tag-item-side">新春主題</span>
@@ -6958,14 +7057,14 @@
                                                 <span class="tag-item-side">限時優惠</span>
                                             </div>
                                         </div>
-                                        <div class="preview-side" style="overflow: visible; flex: 1; display: flex; justify-content: flex-end; align-items: flex-end; position: relative; padding: 10px;">
-                                            <img src="籤.jpg" alt="新春抽籤活動" style="border-radius: 20px; object-fit: contain; width: 100%; height: auto; max-height: 90%; display: block;">
-                                            <span class="image-label" style="position: absolute; bottom: 15px; right: 15px;">抽籤頁</span>
+                                        <div class="preview-side" style="overflow: visible; flex: 1; display: flex; justify-content: center; align-items: center; position: relative; padding: 10px;">
+                                            <img src="籤.jpg" alt="新春抽籤活動" style="border-radius: 20px; width: 150% !important; height: auto !important; display: block; max-width: none !important;">
+                                            <span class="lottery-label">抽籤頁</span>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- 手機版顯示 -->
-                                <div class="mobile-spring-container mobile-only" style="display: none;">
+                                <div class="mobile-spring-container mobile-only">
                                     <div class="spring-main-scroll">
                                         <img src="0201【好命財攻略】.jpg" alt="好命財攻略完整頁面">
                                     </div>
@@ -7325,6 +7424,12 @@
                 title: 'AI 智慧作品集網站',
                 tags: ['#Claude AI', '#網站開發', '#自動化編程'],
                 content: '本作品集網站透過 Claude AI 協作開發完成。運用 AI 輔助編程技術，從視覺設計、版面配置到互動功能，展現人機協作的創新開發模式。整合自然語言處理與程式碼生成，大幅提升開發效率，實現快速迭代與精準客製化的網站建置流程。'
+            },
+            {
+                image: 'AI協作_國中寫情書.png',
+                title: '國中情書代筆',
+                tags: ['#換位思考', '#趣味文案'],
+                content: '國中時期代筆情書，成功撮合一段青澀戀情；後來又被委託寫分手信，以幾句缺乏誠意的文字，讓同一對情侶劃下句點。這段小插曲展現了從小便具備「提案、執行、結案」的完整流程思維，也奠定日後在企劃與創作上，能將想法轉化為具體成果的能力(?'
             }
         ];
         
@@ -8175,9 +8280,6 @@
             if (document.readyState === 'complete' || document.readyState === 'interactive') {
                 initWorkCardsMobile();
             }
-            
-            // 在窗口大小改變時重新初始化
-            window.addEventListener('resize', initWorkCardsMobile);
         
         // 展開收合功能
         window.toggleExpand = function(textId) {
